@@ -1,0 +1,36 @@
+class Card :
+  attributs:
+    name : string
+    cardCost : arrayList<Card>
+    moneyCost : int
+    nbPLayerMin : int //Nb player min pour avoir la carte en jeu
+  méthodes :
+  
+class Facilities :
+  attributs:
+    nextFacilities : arrayList<Facilities> //autes batiments gratuits donnés par cette carte
+  méthodes :
+  
+class RawMaterial :
+  attributs:
+  méthodes :
+    void addRawMaterial(Player ...)
+        
+class ManufacturedProduct:
+  attributs:
+  méthodes :
+    void addManufacturedProduct(Player ...)
+    
+class Guild
+  attributs:
+  méthodes :
+    void addGuildEffect(Player ...)
+   
+class Civil:
+  attributs:
+    ECTS : int
+  méthodes :
+  
+class Scientific:
+  attributs:
+    typeCred : string //CG CS CM
