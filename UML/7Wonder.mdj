@@ -23,12 +23,6 @@
 						{
 							"_type": "UMLAttributeView",
 							"_id": "AAAAAAFvGJXArho0FE0=",
-							"_parent": {
-								"$ref": "AAAAAAFvGI00WAa2BbQ="
-							},
-							"model": {
-								"$ref": "AAAAAAFvGJXAfBoQQms="
-							},
 							"font": "Arial;13;0",
 							"left": 725,
 							"top": 614,
@@ -14323,34 +14317,6 @@
 						},
 						{
 							"_type": "UMLAssociation",
-							"_id": "AAAAAAFvGJRBlRT69vk=",
-							"_parent": {
-								"$ref": "AAAAAAFvGD4GXcY10FQ="
-							},
-							"end1": {
-								"_type": "UMLAssociationEnd",
-								"_id": "AAAAAAFvGJRBlRT7anQ=",
-								"_parent": {
-									"$ref": "AAAAAAFvGJRBlRT69vk="
-								},
-								"reference": {
-									"$ref": "AAAAAAFvGD4GXcY10FQ="
-								}
-							},
-							"end2": {
-								"_type": "UMLAssociationEnd",
-								"_id": "AAAAAAFvGJRBlRT8KqA=",
-								"_parent": {
-									"$ref": "AAAAAAFvGJRBlRT69vk="
-								},
-								"reference": {
-									"$ref": "AAAAAAFvGJQA5RL79uE="
-								},
-								"aggregation": "composite"
-							}
-						},
-						{
-							"_type": "UMLAssociation",
 							"_id": "AAAAAAFvGeoy9XBkd6c=",
 							"_parent": {
 								"$ref": "AAAAAAFvGD4GXcY10FQ="
@@ -14782,14 +14748,6 @@
 							"name": "GameListener"
 						}
 					]
-				},
-				{
-					"_type": "UMLClass",
-					"_id": "AAAAAAFvGJQA5RL79uE=",
-					"_parent": {
-						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
-					},
-					"name": "Card de Comar"
 				},
 				{
 					"_type": "UMLClass",
