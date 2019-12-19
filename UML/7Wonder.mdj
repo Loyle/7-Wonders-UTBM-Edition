@@ -10732,8 +10732,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 640,
-									"top": 1016,
+									"left": 616,
+									"top": 1000,
 									"width": 10,
 									"height": 10
 								},
@@ -10748,8 +10748,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 640,
-									"top": 1016,
+									"left": 616,
+									"top": 1000,
 									"width": 10,
 									"height": 10
 								}
