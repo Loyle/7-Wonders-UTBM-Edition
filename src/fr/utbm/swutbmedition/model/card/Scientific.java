@@ -1,14 +1,25 @@
 package fr.utbm.swutbmedition.model.card;
-import java.util.*;
+import java.awt.Color;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
+import fr.utbm.swutbmedition.model.product.Product;
 
 public class Scientific extends Facilities {
     private String symbole;
 
-    public void Scientific() {
+    public Scientific() {
         // TODO implement here
     }
 
-    public void Scientific(String String name, Color Color color, int int costMoney, Product ArrayList costProduct, ImageIcon ImageIcon skin, int int nbPlayerMin, String String symbole) {
+    public Scientific(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, String symbole) {
         // TODO implement here
     }
-}
+
+
+	@Override
+	protected void effect() {
+		// TODO Auto-generated method stub
+		
+	}}

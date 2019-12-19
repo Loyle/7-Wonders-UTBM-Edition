@@ -3,11 +3,11 @@ package fr.utbm.swutbmedition.model.product;
 import java.util.*;
 
 public class Sheet extends RawMaterial {
-    public void Sheet() {
+    public Sheet() {
         // TODO implement here
     }
 
-    public void Sheet(RawMaterial ArrayLlist materialArray) {
+    public Sheet(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
 

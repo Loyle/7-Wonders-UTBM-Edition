@@ -26,11 +26,8 @@ public abstract class Card {
 
     protected abstract void effect();
 
-    public void Card() {
-        // TODO implement here
-    }
 
-    public void Card(String name, Color color, int costMoney, Product ArrayList costProduct, ImageIcon ImageIcon skin, int int nbPlayerMin) {
+    public Card(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
         // TODO implement here
     }
 

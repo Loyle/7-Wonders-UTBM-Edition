@@ -4,13 +4,10 @@ import java.util.*;
 public class Pen extends RawMaterial {
 
     public Pen() {
-    }
-
-    public void Pen() {
         // TODO implement here
     }
 
-    public void Pen(RawMaterial ArrayLlist materialArray) {
+    public Pen(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
 

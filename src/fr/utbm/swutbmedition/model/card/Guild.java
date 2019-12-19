@@ -1,14 +1,19 @@
 package fr.utbm.swutbmedition.model.card;
 
+import java.awt.Color;
 import java.util.*;
 
-public abstract class Guild extends Card {
+import javax.swing.ImageIcon;
 
-    public void Guild() {
+import fr.utbm.swutbmedition.model.product.Product;
+
+public class Guild extends Card {
+
+    public Guild() {
         // TODO implement here
     }
 
-    public void Guild(String String name, Color Color color, int int costMoney, Product ArrayList costProduct, ImageIcon ImageIcon skin, int int nbPlayerMin) {
+    public Guild(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
         // TODO implement here
     }
     
@@ -16,6 +21,7 @@ public abstract class Guild extends Card {
         // TODO implement here
     }
 
-    protected abstract void effect();
+    protected void effect() {
+	}
 
 }

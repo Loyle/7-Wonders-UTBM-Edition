@@ -3,11 +3,11 @@ package fr.utbm.swutbmedition.model.product;
 import java.util.*;
 
 public class Drink extends RawMaterial {
-    public void Drink() {
+    public Drink() {
         // TODO implement here
     }
 
-    public void Drink(RawMaterial  ArrayLlist materialArray) {
+    public Drink(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
 
