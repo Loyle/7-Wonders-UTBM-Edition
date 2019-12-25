@@ -1,17 +1,28 @@
 package fr.utbm.swutbmedition.model.card;
 
+import java.awt.Color;
 import java.util.*;
+
+import javax.swing.ImageIcon;
+
+import fr.utbm.swutbmedition.model.product.Product;
 
 public class Civil extends Facilities {
 
     private int creditsECTS;
 
-    public void Civil() {
+    public Civil() {
         // TODO implement here
     }
 
-    public void Civil(String String name, Color Color color, int int costMoney, Product ArrayList costProduct, ImageIcon ImageIcon skin, int int nbPlayerMin, int int creditECTS) {
+    public Civil(String name,Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int creditECTS) {
         // TODO implement here
     }
+
+	@Override
+	protected void effect() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

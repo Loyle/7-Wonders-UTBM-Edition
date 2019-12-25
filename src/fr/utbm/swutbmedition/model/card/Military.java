@@ -1,16 +1,27 @@
 package fr.utbm.swutbmedition.model.card;
 
+import java.awt.Color;
 import java.util.*;
+
+import javax.swing.ImageIcon;
+
+import fr.utbm.swutbmedition.model.product.Product;
 
 public class Military extends Facilities {
     private int shield;
 
-    public void Military() {
+    public Military() {
         // TODO implement here
     }
 
-    public void Military(String String name, Color Color color, int int costMoney, Product ArrayList costProduct, ImageIcon ImageIcon skin, int int nbPlayerMin, int int shield) {
+    public Military(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int shield) {
         // TODO implement here
     }
 
+
+	@Override
+	protected void effect() {
+		// TODO Auto-generated method stub
+		
+	}
 }
