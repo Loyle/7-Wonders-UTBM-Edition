@@ -7,7 +7,7 @@ public class RulesFrame {
 
     private RulesController rulesController;
 
-    public void RulesFrame() {
+    public RulesFrame() {
         // TODO implement here
     }
 

@@ -10,7 +10,7 @@ public class GameFrame {
     private GameController gameController;
 
 
-    public void GameFrame() {
+    public GameFrame() {
         // TODO implement here
     }
 
