@@ -10,5 +10,4 @@ public class Pen extends RawMaterial {
     public Pen(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
-
 }

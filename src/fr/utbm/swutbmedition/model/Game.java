@@ -29,8 +29,8 @@ public class Game {
     }
     
     public void start() {
-    	if(this.players.size() < 2)
-    		return;
+    	//if(this.players.size() < 2)
+    	//	return;
     	
     	this.initGame();
     	
@@ -64,6 +64,20 @@ public class Game {
     	// C'est ici qu'on va affecter les board / cartes aux joueurs
     	// Sachant qu'il faut permettre de pouvoir choisir la face de board sur laquel il souhaite commencer
     	
+    	// Je fais les essaies ici du coup
+    	for(Card card : this.existingCards) {
+        	System.out.println(card.getName());
+        }
+    	this.addPlayer(new Player("Marco"));
+    	this.addPlayer(new Player("Louis"));
+    	this.addPlayer(new Player("Theo"));
+    	this.addPlayer(new Player("Antoine"));
+    	
+    	// On donne les cartes de depart à l'ensemble des joueurs
+    	for(Player p : this.players) {
+    		
+    		//p.addCard();
+    	}
     }
     
     private boolean checkEnd() {

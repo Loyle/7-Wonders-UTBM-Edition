@@ -5,11 +5,11 @@ import java.util.*;
 public class RawMaterial extends Product {
     protected ArrayList<RawMaterial> materielArray;
 
-    public void RawMaterial() {
+    public RawMaterial() {
         // TODO implement here
     }
 
-    public void RawMaterial(ArrayList<RawMaterial> materialArray) {
+    public RawMaterial(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
 

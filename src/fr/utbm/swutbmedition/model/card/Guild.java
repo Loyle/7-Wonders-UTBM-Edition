@@ -1,20 +1,14 @@
 package fr.utbm.swutbmedition.model.card;
 
-import java.awt.Color;
-import java.util.*;
-
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
-
 import fr.utbm.swutbmedition.model.product.Product;
+import javafx.scene.paint.Color;
 
 public class Guild extends Card {
 
-    public Guild() {
-        // TODO implement here
-    }
-
     public Guild(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
-        // TODO implement here
+    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
     }
     
     public void addPlayer() {

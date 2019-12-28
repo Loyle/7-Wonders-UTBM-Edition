@@ -33,6 +33,9 @@ public abstract class Card {
         this.skin = skin;
         this.nbPlayerMin = nbPlayerMin;
     }
+    public String getName() {
+		return this.name;
+	}
 
     protected abstract void effect();
 }

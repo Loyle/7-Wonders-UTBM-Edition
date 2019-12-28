@@ -10,5 +10,4 @@ public class Drink extends RawMaterial {
     public Drink(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
-
 }

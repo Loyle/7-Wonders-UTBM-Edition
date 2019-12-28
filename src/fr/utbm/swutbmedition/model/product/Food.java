@@ -4,11 +4,11 @@ import java.util.*;
 
 public class Food extends RawMaterial {
 
-    public void Food() {
+    public Food() {
         // TODO implement here
     }
 
-    public void Food(ArrayList<RawMaterial> materialArray) {
+    public Food(ArrayList<RawMaterial> materialArray) {
         // TODO implement here
     }
 }
