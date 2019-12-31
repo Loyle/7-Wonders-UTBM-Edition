@@ -11,5 +11,27 @@ public class Board {
     private int level;
 
     private ArrayList<Step> steps;
-
+    
+    public Board() {
+    	this.name = "";
+    	this.product = new Product();
+    	this.level = 0;
+    	this.steps = new ArrayList<Step>();
+    }
+    public Board(String name, Product product, ArrayList<Step> steps) {
+    	this.name = name;
+    	this.product = product;
+    	this.level = 0;
+    	this.steps = steps;
+    }
+    
+    public int getCreditsECTS() {
+    	int credits = 0;
+    	for(int i = 0; i <= level; i++) {
+    		//this.steps[i].getEffect();
+    		credits += 1;
+    	}
+    	
+    	return credits;
+    }
 }

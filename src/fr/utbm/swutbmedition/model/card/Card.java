@@ -16,6 +16,7 @@ public abstract class Card {
     protected ArrayList<Product> costProduct;
     protected ImageIcon skin;
     protected int nbPlayerMin;
+    protected int age;
 
 
     public Card() {
@@ -25,9 +26,11 @@ public abstract class Card {
         this.costProduct = new ArrayList<Product>();
         this.skin = new ImageIcon();
         this.nbPlayerMin = 0;
+        this.age = 1;
     }
-    public Card(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+    public Card(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
         this.name = name;
+        this.age = age;
         this.color = color;
         this.costMoney = costMoney;
         this.costProduct= costProduct;
@@ -37,6 +40,9 @@ public abstract class Card {
     public String getName() {
 		return this.name;
 	}
+    public int getAge() {
+    	return this.age;
+    }
 
     protected abstract void effect();
 	protected abstract void effect(Player p);

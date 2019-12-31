@@ -10,8 +10,8 @@ import javafx.scene.paint.Color;
 public class Scientific extends Facilities {
     private String symbole;
 
-    public Scientific(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, String symbole) {
-    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Scientific(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, String symbole) {
+    	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     	this.symbole = symbole;
     }
 

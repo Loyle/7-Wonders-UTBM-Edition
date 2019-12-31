@@ -12,7 +12,8 @@ public class Game {
     private ArrayList<Player> players;
     private Player currentPlayer;
     private int round;
-    private String age;  // 1: TC 2: SOC 3: BR
+    private int age;
+    private String ageName;  // 1: TC 2: SOC 3: BR
     private boolean isStart;
     private ArrayList<Card> existingCards;
 
@@ -30,6 +31,7 @@ public class Game {
     }
     
     public void start() {
+    	// Desactiver pour les essaies
     	//if(this.players.size() < 2)
     	//	return;
     	
@@ -55,9 +57,17 @@ public class Game {
     			// On a fait un tour de tous les joueurs
     			playerID = 0;
     			this.round++;
+    			
+    			if(this.round % 6 == 0) {
+    				// Il y a 6 tours par age
+    				this.age++;
+    				
+    				// Faire les conflicts de fin d'age
+    			}
     		}
     	}
     	
+    	// Partie finie !
     	// ici declencher les actions de fin de game
     }
     

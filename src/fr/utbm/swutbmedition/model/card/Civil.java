@@ -11,9 +11,13 @@ public class Civil extends Facilities {
 
     private int creditsECTS;
 
-    public Civil(String name,Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int creditECTS) {
-        super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Civil(String name, int age,Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int creditECTS) {
+        super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
         this.creditsECTS = creditECTS;
+    }
+    
+    public int getCreditsECTS() {
+    	return this.creditsECTS;
     }
 
 	@Override

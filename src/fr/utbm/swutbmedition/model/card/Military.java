@@ -10,8 +10,8 @@ import javafx.scene.paint.Color;
 public class Military extends Facilities {
     private int fx;
 
-    public Military(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int fx) {
-    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Military(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, int fx) {
+    	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     	this.fx = fx;
     }
 

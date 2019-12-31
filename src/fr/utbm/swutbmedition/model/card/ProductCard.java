@@ -11,8 +11,8 @@ public class ProductCard extends Card {
     private Product product;
 
 
-    public ProductCard(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
-    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public ProductCard(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+    	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     	this.product = new Product();
     }
 

@@ -85,24 +85,33 @@ public class CardLoader {
                 String effect = split[7];
                 if(effect.equals("-"))
                 	effect = "0";
+                
+                // AGE
+                int age = 1; // TC
+                if(split[6] == "SOC") // SOC
+                	age = 2;
+                else if(split[6] == "BR") // BR
+                	age = 3;
+                
+                
                 switch (split[1]) {
 				case "CardProduct":
-					cards.add(new ProductCard(split[2], Color.AZURE, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
+					cards.add(new ProductCard(split[2], age, Color.AZURE, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
 					break;
 				case "Civil":
-					cards.add(new Civil(split[2], Color.YELLOW, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
+					cards.add(new Civil(split[2], age, Color.YELLOW, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
 					break;
 				case "Commercial":
-					cards.add(new Commercial(split[2], Color.GREEN, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
+					cards.add(new Commercial(split[2], age, Color.GREEN, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
 					break;
 				case "Military":
-					cards.add(new Military(split[2], Color.RED, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));					
+					cards.add(new Military(split[2], age, Color.RED, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));					
 					break;
 				case "Scientific":
-					cards.add(new Scientific(split[2], Color.MAGENTA, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
+					cards.add(new Scientific(split[2], age, Color.MAGENTA, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
 					break;
 				case "Guild":
-					cards.add(new Guild(split[2], Color.YELLOW, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));					
+					cards.add(new Guild(split[2], age, Color.YELLOW, Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));					
 					break;					
 				default:
 					break;

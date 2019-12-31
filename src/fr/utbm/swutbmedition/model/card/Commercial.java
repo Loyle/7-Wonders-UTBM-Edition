@@ -10,8 +10,8 @@ import javafx.scene.paint.Color;
 
 public class Commercial extends Facilities {
 
-    public Commercial(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
-    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Commercial(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+    	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     }
 
 	@Override

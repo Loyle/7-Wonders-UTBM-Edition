@@ -9,8 +9,8 @@ public abstract class Facilities extends Card {
 
     protected ArrayList<Facilities> nextFacilities;
 
-    public Facilities(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
-        super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Facilities(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+        super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     }
 
     protected abstract void effect();

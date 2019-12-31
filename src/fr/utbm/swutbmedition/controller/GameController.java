@@ -11,8 +11,10 @@ public class GameController {
     private Game game;
 
 
-    public void GameController() {
-        // TODO implement here
+    public void GameController(GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+        
+        // C'est ici qu'il faudra mettre la fct start et tout d'ailleurs !
     }
 
 }

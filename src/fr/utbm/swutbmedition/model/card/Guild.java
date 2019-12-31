@@ -9,8 +9,8 @@ import javafx.scene.paint.Color;
 
 public class Guild extends Card {
 
-    public Guild(String name, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
-    	super(name,color,costMoney,costProduct,skin,nbPlayerMin);
+    public Guild(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+    	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     }
     
     public void addPlayer() {
