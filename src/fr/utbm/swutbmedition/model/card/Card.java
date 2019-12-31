@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.swing.ImageIcon;
 
+import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.product.Product;
 import javafx.scene.paint.Color;
 
@@ -38,4 +39,5 @@ public abstract class Card {
 	}
 
     protected abstract void effect();
+	protected abstract void effect(Player p);
 }

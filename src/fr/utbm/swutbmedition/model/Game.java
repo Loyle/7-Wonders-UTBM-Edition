@@ -12,6 +12,7 @@ public class Game {
     private ArrayList<Player> players;
     private Player currentPlayer;
     private int round;
+    private String age;  // 1: TC 2: SOC 3: BR
     private boolean isStart;
     private ArrayList<Card> existingCards;
 
@@ -74,6 +75,8 @@ public class Game {
     	this.addPlayer(new Player("Antoine"));
     	
     	// On donne les cartes de depart à l'ensemble des joueurs
+    	
+    	// ATTENTION IL FAUT COUPER PAR AGE 
     	for(Player p : this.players) {
     		
     		//p.addCard();

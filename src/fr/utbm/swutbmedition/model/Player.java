@@ -12,6 +12,8 @@ public class Player {
     private ArrayList<Card> currentCard;
     private Board board;
     private int money;
+    private int fx;
+    private int creditsECTS;
 
     public Player() {
         this.name = "";
@@ -20,6 +22,8 @@ public class Player {
         this.currentCard = new ArrayList<Card>();
         this.board = new Board();
         this.money = 0;
+        this.fx = 0;
+        this.setCreditsECTS(0);
     }
     public Player(String name) {
     	this.name = "";
@@ -28,6 +32,8 @@ public class Player {
         this.currentCard = new ArrayList<Card>();
         this.board = new Board();
         this.money = 0;
+        this.fx = 0;
+        this.setCreditsECTS(0);
     }
     
     public void addCard(Card card) {
@@ -45,7 +51,17 @@ public class Player {
     }
 
     public void countScore() {
-        // Wesh je sé po fair
+        int scientificScore;
+    	for(Card card: this.usedCard) {
+    		if(card.getClass().equals());
+    	}
+    	
     }
+	public int getCreditsECTS() {
+		return creditsECTS;
+	}
+	public void setCreditsECTS(int creditsECTS) {
+		this.creditsECTS = creditsECTS;
+	}
 
 }

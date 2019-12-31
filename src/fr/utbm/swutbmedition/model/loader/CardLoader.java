@@ -81,6 +81,7 @@ public class CardLoader {
                 	}
                 }
                 
+                // Faire peut etre 3 ArrayList<Card> et les classer selon l'age d'apparition de la card 
                 String effect = split[7];
                 if(effect.equals("-"))
                 	effect = "0";
