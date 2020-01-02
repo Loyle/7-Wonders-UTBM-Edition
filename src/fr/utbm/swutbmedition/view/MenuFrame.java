@@ -1,7 +1,6 @@
 package fr.utbm.swutbmedition.view;
 
 import fr.utbm.swutbmedition.controller.MenuController;
-import fr.utbm.swutbmedition.model.Game;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -29,8 +28,7 @@ public class MenuFrame extends Parent {
     	startButton.setMinSize(200, 50);
     	startButton.setOnMouseClicked(new EventHandler<MouseEvent >() {
     		public void handle(MouseEvent e) {
-    			Game game = new Game(new GameFrame());
-    			game.start();
+    			new GameFrame();
     		}
 		});
     	

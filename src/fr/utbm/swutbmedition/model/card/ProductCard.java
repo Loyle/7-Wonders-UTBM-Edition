@@ -21,7 +21,11 @@ public class ProductCard extends Card {
 
 	@Override
 	protected void effect(Player p) {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public Card copy() {
+		return new ProductCard(name, age, color, costMoney, costProduct, skin, nbPlayerMin);
 	}
 }

@@ -27,4 +27,10 @@ public class Scientific extends Facilities {
 	protected void effect(Player p) {
 		// TODO Auto-generated method stub
 		
-	}}
+	}
+	
+	@Override
+	public Card copy() {
+		return new Scientific(name, age, color, costMoney, costProduct, skin, nbPlayerMin, symbole);
+	}
+}

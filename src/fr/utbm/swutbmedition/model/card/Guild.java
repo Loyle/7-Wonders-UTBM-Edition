@@ -25,5 +25,10 @@ public class Guild extends Card {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Card copy() {
+		return new Guild(name, age, color, costMoney, costProduct, skin, nbPlayerMin);
+	}
 
 }

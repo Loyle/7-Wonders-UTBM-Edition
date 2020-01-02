@@ -12,8 +12,8 @@ import fr.utbm.swutbmedition.model.card.Scientific;
 public class Player {
     private String name;
     private int score;
-    private ArrayList<Card> usedCard;
-    private ArrayList<Card> currentCard;
+    private ArrayList<Card> usedCards;
+    private ArrayList<Card> handCards;
     private Board board;
     private int money;
     private int fx;
@@ -23,8 +23,8 @@ public class Player {
     public Player() {
         this.name = "";
         this.score = 0;
-        this.usedCard = new ArrayList<Card>();
-        this.currentCard = new ArrayList<Card>();
+        this.usedCards = new ArrayList<Card>();
+        this.handCards = new ArrayList<Card>();
         this.board = new Board();
         this.money = 0;
         this.fx = 0;
@@ -32,10 +32,10 @@ public class Player {
         this.conflicts = new ArrayList<Integer>();
     }
     public Player(String name) {
-    	this.name = "";
+    	this.name = name;
         this.score = 0;
-        this.usedCard = new ArrayList<Card>();
-        this.currentCard = new ArrayList<Card>();
+        this.usedCards = new ArrayList<Card>();
+        this.handCards = new ArrayList<Card>();
         this.board = new Board();
         this.money = 0;
         this.fx = 0;
@@ -44,12 +44,12 @@ public class Player {
     }
     
     public void addCard(Card card) {
-    	this.currentCard.add(card);
+    	this.handCards.add(card);
     }
     public boolean useCard(Card card) {
-    	if(this.currentCard.contains(card)) {
-    		this.currentCard.remove(card);
-    		this.usedCard.add(card);
+    	if(this.handCards.contains(card)) {
+    		this.handCards.remove(card);
+    		this.usedCards.add(card);
     		return true;
     	}
     	else {
@@ -80,7 +80,7 @@ public class Player {
         int commercialPoints = 0;
         int guildPoints = 0;
         
-    	for(Card card: this.usedCard) {
+    	for(Card card: this.usedCards) {
     		if(card instanceof Civil) {
     			// les cartes civils on des pts (credit ECTS)
     			civilPoints += ((Civil) card).getCreditsECTS();
@@ -109,5 +109,11 @@ public class Player {
 	}
 	public void addConflicts(int result) {
 		this.conflicts.add(result);
+	}
+	public String getName() {
+		return this.name;
+	}
+	public ArrayList<Card> getHandCards() {
+		return this.handCards;
 	}
 }

@@ -88,9 +88,9 @@ public class CardLoader {
                 
                 // AGE
                 int age = 1; // TC
-                if(split[6] == "SOC") // SOC
+                if(split[6].equals("SOC")) // SOC
                 	age = 2;
-                else if(split[6] == "BR") // BR
+                else if(split[6].equals("BR")) // BR
                 	age = 3;
                 
                 

@@ -18,14 +18,17 @@ public class Military extends Facilities {
 
 	@Override
 	protected void effect() {
-		
-		
+			
 	}
 
 
 	@Override
 	protected void effect(Player p) {
-		
-		
+			
+	}
+	
+	@Override
+	public Card copy() {
+		return new Military(name, age, color, costMoney, costProduct, skin, nbPlayerMin, fx);
 	}
 }

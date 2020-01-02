@@ -32,4 +32,9 @@ public class Civil extends Facilities {
 		
 	}
 
+	@Override
+	public Card copy() {
+		return new Civil(name, age, color, costMoney, costProduct, skin, nbPlayerMin, creditsECTS);
+	}
+
 }

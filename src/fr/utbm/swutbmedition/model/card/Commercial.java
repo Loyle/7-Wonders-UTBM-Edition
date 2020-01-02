@@ -25,4 +25,9 @@ public class Commercial extends Facilities {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Card copy() {
+		return new Commercial(name, age, color, costMoney, costProduct, skin, nbPlayerMin);
+	}
 }
