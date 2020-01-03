@@ -1,6 +1,6 @@
 package fr.utbm.swutbmedition;
 
-import fr.utbm.swutbmedition.view.MenuFrame;
+import fr.utbm.swutbmedition.view.MainFrame;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -22,9 +22,8 @@ public class SeventWonders extends Application {
 		scene.setFill(Color.BEIGE);
 		primaryStage.setScene(scene);
 		
-		MenuFrame menu = new MenuFrame();
-		
-		root.setCenter(menu);
+		MainFrame frame = new MainFrame(primaryStage);
+		frame.showMenuFrame();
 		
 		primaryStage.show();
 	}

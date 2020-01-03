@@ -12,6 +12,7 @@ public class Game {
     private Player currentPlayer;
     private int round;
     private int age;
+    private int rotation; // 0 => right, 1 => left
     private String ageName;  // 1: TC 2: SOC 3: BR <=> a voir si on s'en sert
     private boolean isStart;
     private ArrayList<Card> existingCards;
@@ -24,6 +25,7 @@ public class Game {
         this.age = 1;
         this.isStart = false;
         this.existingCards = CardLoader.loadCard();
+        this.rotation = 0;
     }
     
     public int getRound() {
@@ -64,4 +66,18 @@ public class Game {
     public ArrayList<Card> getExistingCards() {
     	return this.existingCards;
     }
+
+	/**
+	 * @return the rotation
+	 */
+	public int getRotation() {
+		return rotation;
+	}
+
+	/**
+	 * @param rotation the rotation to set
+	 */
+	public void setRotation(int rotation) {
+		this.rotation = rotation;
+	}
 }

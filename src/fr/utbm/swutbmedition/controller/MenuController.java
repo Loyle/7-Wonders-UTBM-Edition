@@ -15,6 +15,6 @@ public class MenuController {
     }
 
 	public void onBackBtnClick() {
-		this.menuFrame.showMainMenu();		
+		this.menuFrame.showMenu();		
 	}
 }

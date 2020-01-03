@@ -4,22 +4,33 @@ import fr.utbm.swutbmedition.controller.MenuController;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class MenuFrame extends Parent {
+public class MenuFrame extends Scene {
     private MenuController menuController;
+    private MainFrame mainFrame;
+    private BorderPane root;
+    
+    private VBox layoutMenu;
+    private VBox layoutSettings;
 
-    public MenuFrame() {
+    public MenuFrame(MainFrame mainFrame, BorderPane root) {
+    	super(root,800,600);
+    	
+    	this.root = root;
+    	this.mainFrame = mainFrame;
     	this.menuController = new MenuController(this);
-    	showMainMenu();
+    	
+    	this.initFrame();
     }
-    public void showMainMenu() {
-    	this.getChildren().clear();
+    public void initFrame() {
     	Text title = new Text("7 Wonders UTBM Edition");
     	title.setX(60);
     	title.setTextAlignment(TextAlignment.CENTER);
@@ -28,7 +39,7 @@ public class MenuFrame extends Parent {
     	startButton.setMinSize(200, 50);
     	startButton.setOnMouseClicked(new EventHandler<MouseEvent >() {
     		public void handle(MouseEvent e) {
-    			new GameFrame();
+    			mainFrame.showGameFrame();
     		}
 		});
     	
@@ -40,15 +51,12 @@ public class MenuFrame extends Parent {
     		}
 		});
     	
-    	VBox layout = new VBox(title,startButton,settingButton);
-    	layout.setSpacing(30);
-    	layout.setAlignment(Pos.CENTER);
-    	this.getChildren().add(layout);
-    }
-    
-    public void showSettings() {
-    	this.getChildren().clear();
-    	Text title = new Text("Paramètres");
+    	layoutMenu = new VBox(title,startButton,settingButton);
+    	layoutMenu.setSpacing(30);
+    	layoutMenu.setAlignment(Pos.CENTER);
+    	
+    	
+    	title = new Text("Paramètres");
     	title.setX(60);
     	title.setTextAlignment(TextAlignment.CENTER);
     	
@@ -63,12 +71,18 @@ public class MenuFrame extends Parent {
     		}
 		});
     	HBox btnLayout = new HBox(saveButton,backButton);
+    	btnLayout.setAlignment(Pos.CENTER);
     	btnLayout.setSpacing(50);
     	
-    	VBox layout = new VBox(title,btnLayout);
-    	layout.setSpacing(30);
-    	layout.setAlignment(Pos.CENTER);
-    	this.getChildren().add(layout);
+    	layoutSettings = new VBox(title,btnLayout);
+    	layoutSettings.setSpacing(30);
+    	layoutSettings.setAlignment(Pos.CENTER);
     }
-
+    public void showMenu() {
+    	root.setCenter(layoutMenu);
+    }
+    
+    public void showSettings() {
+    	root.setCenter(layoutSettings);    	
+    }
 }
