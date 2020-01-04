@@ -1,11 +1,15 @@
 package fr.utbm.swutbmedition.controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.product.Food;
+import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
+import sun.security.jca.GetInstance.Instance;
 
 public class GameController {
 
@@ -91,6 +95,10 @@ public class GameController {
 				else
 					this.game.setRotation(1); // Left
 			}
+			else {
+				// On echange les paquets de cartes
+				this.switchPlayersCards();
+			}
 		}
 		
 		if(this.checkEnd())
@@ -106,8 +114,8 @@ public class GameController {
 		this.gameFrame.displayBoard(this.game.getCurrentPlayer());
 		
 	}
-    
-    public void distributeCards() {
+
+	public void distributeCards() {
     	// Distribue les cartes aux joueurs en fct de l'age
     	for(Player p : this.game.getPlayers()) {
     		// On clear la main actuelle
@@ -126,6 +134,34 @@ public class GameController {
     		}
     	}
     }
+	
+	private void switchPlayersCards() {
+		if(this.game.getRotation() == 0) { // vers la droite
+			ArrayList<Card> save = this.game.getPlayers().get(0).getHandCards();
+			ArrayList<Card> temp = save;
+			
+			for(int i = 1; i < this.game.getPlayers().size(); i++) {
+				temp = this.game.getPlayers().get(i).getHandCards();
+				this.game.getPlayers().get(i).setHandCards(save);
+				save = temp;
+			}
+			
+			this.game.getPlayers().get(0).setHandCards(save);
+		}
+		else { // vers la gauche
+			int last = this.game.getPlayers().size() - 1;
+			ArrayList<Card> save = this.game.getPlayers().get(last).getHandCards();
+			ArrayList<Card> temp = save;
+			
+			for(int i = last - 1; i >= 0; i--) {
+				temp = this.game.getPlayers().get(i).getHandCards();
+				this.game.getPlayers().get(i).setHandCards(save);
+				save = temp;
+			}
+			
+			this.game.getPlayers().get(last).setHandCards(save);
+		}
+	}
     
     private void doConflicts() {
  		// Voir comment faire ca
@@ -146,4 +182,33 @@ public class GameController {
 		
 		System.out.println("Partie terminée");
     }
+
+	public void useCard(Player player, Card card) {
+		// Ici faut faire 10000 check
+		// Regarder si il a les ressources etc...
+		
+		// On check déjà si c'est gratos
+		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
+			player.useCard(card);			
+			this.next();
+		}
+		// Ensuite cout en piece
+		else if(card.getCostMoney() != 0 && card.getCostProduct().size() == 0) {
+			if(player.getMoney() >= card.getCostMoney()) {
+				player.setMoney(player.getMoney() - card.getCostMoney());
+				player.useCard(card);			
+				this.next();
+			}
+		}
+		// Enfin les cout en ressources
+		else {
+			ArrayList<Product> usedProducts = new ArrayList<Product>();
+			for(Product neededProd : card.getCostProduct()) {
+				if(neededProd instanceof Food) {
+					
+				}
+			}
+			this.next();
+		}
+	}
 }

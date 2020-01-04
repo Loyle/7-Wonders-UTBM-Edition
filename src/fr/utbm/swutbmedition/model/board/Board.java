@@ -5,11 +5,8 @@ import fr.utbm.swutbmedition.model.product.Product;
 
 public class Board {
     private String name;
-
     private Product product;
-
     private int level;
-
     private ArrayList<Step> steps;
     
     public Board() {
@@ -33,5 +30,8 @@ public class Board {
     	}
     	
     	return credits;
+    }
+    public Product getProduct() {
+    	return this.product;
     }
 }

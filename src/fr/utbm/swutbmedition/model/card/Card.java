@@ -43,7 +43,13 @@ public abstract class Card {
     public int getAge() {
     	return this.age;
     }
-
+    public int getCostMoney() {
+    	return this.costMoney;
+    }
+    public ArrayList<Product> getCostProduct() {
+    	return this.costProduct;
+    }
+    
     protected abstract void effect();
 	protected abstract void effect(Player p);
 	public abstract Card copy();

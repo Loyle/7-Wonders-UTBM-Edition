@@ -3,6 +3,7 @@ package fr.utbm.swutbmedition.view;
 import fr.utbm.swutbmedition.controller.GameController;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
+import fr.utbm.swutbmedition.model.card.Card;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -21,6 +23,7 @@ public class GameFrame extends Scene {
     
     private VBox scoreboard;
     private HBox gameStatus;
+    private HBox cardsLayout;
 
     public GameFrame(MainFrame mainFrame, BorderPane root) {
     	super(root,800,600);
@@ -59,6 +62,12 @@ public class GameFrame extends Scene {
     	layout.getChildren().add(btn);
     	
     	this.root.setCenter(layout);
+    	
+    	
+    	this.cardsLayout = new HBox();
+    	this.cardsLayout.setSpacing(0);
+    	this.cardsLayout.setAlignment(Pos.CENTER);
+    	this.root.setBottom(this.cardsLayout);
     }
     
     public void refreshScoreboard() {
@@ -75,7 +84,19 @@ public class GameFrame extends Scene {
 
 
 	public void displayBoard(Player currentPlayer) {
-		// Afficher le boad du player		
+		this.cardsLayout.getChildren().clear();
+		for(Card card : currentPlayer.getHandCards()) {
+			Button btn = new Button(card.getName());
+			btn.setMinHeight(100);
+			btn.setMaxWidth(Double.MAX_VALUE);
+	    	btn.setOnMouseClicked(new EventHandler<MouseEvent >() {
+	    		public void handle(MouseEvent e) {
+	    			gameController.useCard(currentPlayer, card);
+	    		}
+			});
+	    	HBox.setHgrow(btn, Priority.ALWAYS);
+	    	this.cardsLayout.getChildren().add(btn);
+		}
 	}
 
 }

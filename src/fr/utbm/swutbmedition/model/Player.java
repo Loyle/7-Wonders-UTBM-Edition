@@ -7,7 +7,9 @@ import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.model.card.Civil;
 import fr.utbm.swutbmedition.model.card.Commercial;
 import fr.utbm.swutbmedition.model.card.Guild;
+import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.card.Scientific;
+import fr.utbm.swutbmedition.model.product.Product;
 
 public class Player {
     private String name;
@@ -58,7 +60,6 @@ public class Player {
     }
 
     public void countScore() {
-    	
     	// Les pts de conflits sont converti en pt de victoire
     	int conflictsPoints = 0;
         for(int points : this.conflicts) {
@@ -101,6 +102,21 @@ public class Player {
     	}
     	this.creditsECTS = conflictsPoints + treasurePoints + wonderPoints + civilPoints + scientificPoints + commercialPoints + guildPoints;
     }
+    public ArrayList<Product> getAllProduct() {
+    	ArrayList<Product> products = new ArrayList<Product>();
+    	
+    	// On récupère le product du board
+    	products.add(this.board.getProduct());
+    	
+    	for(Card card : this.usedCards) {
+    		if (card instanceof ProductCard) {
+    			// On récupère les products de toutes les cards
+				products.add(((ProductCard) card).getProduct());
+			}
+    	}
+    	
+    	return products;
+    }
 	public int getCreditsECTS() {
 		return creditsECTS;
 	}
@@ -115,5 +131,14 @@ public class Player {
 	}
 	public ArrayList<Card> getHandCards() {
 		return this.handCards;
+	}
+	public void setHandCards(ArrayList<Card> handCards) {
+		this.handCards = handCards;
+	}
+	public int getMoney() {
+		return this.money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }

@@ -15,7 +15,11 @@ public class ProductCard extends Card {
     	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
     	this.product = new Product();
     }
-
+    
+    public Product getProduct() {
+    	return this.product;
+    }
+    
     protected void effect() {
 	}
 
