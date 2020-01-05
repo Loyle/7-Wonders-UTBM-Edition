@@ -203,12 +203,29 @@ public class GameController {
 		// Enfin les cout en ressources
 		else {
 			ArrayList<Product> usedProducts = new ArrayList<Product>();
-			for(Product neededProd : card.getCostProduct()) {
-				if(neededProd instanceof Food) {
-					
+			ArrayList<Product> playerProducts = player.getAllProducts();
+			
+			if(playerProducts.size() > 0) {
+				for(Product neededProd : card.getCostProduct()) {
+					int i = 0;
+					while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
+						i++;
+					}
+					if(i < playerProducts.size()) {
+						// We found a product !
+						usedProducts.add(neededProd);
+					}
+				}
+				
+				if(card.getCostProduct().size() == usedProducts.size()) {
+					// We have all the product to use this card
+					player.useCard(card);
+					this.next();
+				}
+				else {
+					System.out.println("Il vous manque des ressources !");
 				}
 			}
-			this.next();
 		}
 	}
 }

@@ -102,13 +102,16 @@ public class Player {
     	}
     	this.creditsECTS = conflictsPoints + treasurePoints + wonderPoints + civilPoints + scientificPoints + commercialPoints + guildPoints;
     }
-    public ArrayList<Product> getAllProduct() {
+    public ArrayList<Product> getAllProducts() {
     	ArrayList<Product> products = new ArrayList<Product>();
     	
     	// On récupère le product du board
     	products.add(this.board.getProduct());
     	
+    	// FAUT RECUPERER AUSSI LES PRODUCT DES ETAPES DE BOARD
+    	
     	for(Card card : this.usedCards) {
+    		
     		if (card instanceof ProductCard) {
     			// On récupère les products de toutes les cards
 				products.add(((ProductCard) card).getProduct());
