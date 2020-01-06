@@ -6,7 +6,7 @@ import fr.utbm.swutbmedition.model.product.Product;
 public class Board {
     private String name;
     private Product product;
-    private int level;
+    private int level; // step actuel de la w 
     private ArrayList<Step> steps;
     
     public Board() {

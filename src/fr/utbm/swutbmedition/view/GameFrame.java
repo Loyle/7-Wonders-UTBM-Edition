@@ -79,7 +79,7 @@ public class GameFrame extends Scene {
     public void refreshScoreboard() {
     	this.scoreboard.getChildren().clear();
     	for(Player p : this.game.getPlayers()) {
-    		p.countScore();
+    		p.countScore(game);
     		this.scoreboard.getChildren().add(new Text(p.getName() + " : " + p.getCreditsECTS()));   		
     	}
     }

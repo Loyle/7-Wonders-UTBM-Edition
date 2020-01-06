@@ -202,7 +202,7 @@ public class GameController {
     			p.addConflicts(0);
     		
     		
-    		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+    		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
     		toCheck = pos - 1;
     		
     		if(pos == 0)

@@ -57,7 +57,7 @@ public class Player {
     	}
     }
 
-    public void countScore() {
+    public void countScore(Game game) {
     	// Les pts de conflits sont converti en pt de victoire
     	int conflictsPoints = 0;
         for(int points : this.conflicts) {
@@ -95,6 +95,8 @@ public class Player {
     				commercialPoints += 2;
     		}
     		else if(card instanceof Guild) {
+    			Guild guild = (Guild) card;
+    			guild.effect(game, this);
     			// Depend de ses voisin etc... CHIANT
     		}
     	}
@@ -132,6 +134,10 @@ public class Player {
 	}
 	public ArrayList<Card> getHandCards() {
 		return this.handCards;
+	}
+	
+	public ArrayList<Card> getUsedCard(){
+		return this.usedCards;
 	}
 	public void setHandCards(ArrayList<Card> handCards) {
 		this.handCards = handCards;

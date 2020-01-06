@@ -54,6 +54,7 @@ public abstract class Card {
 	}
     
     protected abstract void effect();
-	protected abstract void effect(Player p);
+    protected abstract void effect(Player p);
+	
 	public abstract Card copy();
 }

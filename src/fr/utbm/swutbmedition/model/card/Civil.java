@@ -22,7 +22,6 @@ public class Civil extends Facilities {
 
 	@Override
 	protected void effect(Player p) {
-		p.setCreditsECTS(p.getCreditsECTS()+this.creditsECTS);
 		
 	}
 
