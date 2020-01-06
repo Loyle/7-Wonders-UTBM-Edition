@@ -3,7 +3,6 @@ package fr.utbm.swutbmedition.view;
 import fr.utbm.swutbmedition.controller.MenuController;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -13,18 +12,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class MenuFrame extends Scene {
+public class MenuFrame extends BorderPane {
     private MenuController menuController;
     private MainFrame mainFrame;
-    private BorderPane root;
     
     private VBox layoutMenu;
     private VBox layoutSettings;
 
-    public MenuFrame(MainFrame mainFrame, BorderPane root) {
-    	super(root,800,600);
-    	
-    	this.root = root;
+    public MenuFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
     	this.menuController = new MenuController(this);
     	
@@ -79,10 +74,10 @@ public class MenuFrame extends Scene {
     	layoutSettings.setAlignment(Pos.CENTER);
     }
     public void showMenu() {
-    	root.setCenter(layoutMenu);
+    	this.setCenter(layoutMenu);
     }
     
     public void showSettings() {
-    	root.setCenter(layoutSettings);    	
+    	this.setCenter(layoutSettings);    	
     }
 }

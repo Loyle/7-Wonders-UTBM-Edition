@@ -8,16 +8,15 @@ import fr.utbm.swutbmedition.model.product.Product;
 import javafx.scene.paint.Color;
 
 public class ProductCard extends Card {
-    private Product product;
-
-
-    public ProductCard(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+	ArrayList<Product> products;
+	
+    public ProductCard(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, ArrayList<Product> products) {
     	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
-    	this.product = new Product();
+    	this.products = products;
     }
     
-    public Product getProduct() {
-    	return this.product;
+    public ArrayList<Product> getProducts() {
+    	return this.products;
     }
     
     protected void effect() {
@@ -30,6 +29,6 @@ public class ProductCard extends Card {
 	
 	@Override
 	public Card copy() {
-		return new ProductCard(name, age, color, costMoney, costProduct, skin, nbPlayerMin);
+		return new ProductCard(name, age, color, costMoney, costProduct, skin, nbPlayerMin,this.products);
 	}
 }

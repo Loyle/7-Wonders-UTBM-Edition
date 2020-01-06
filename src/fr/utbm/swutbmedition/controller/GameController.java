@@ -7,6 +7,7 @@ import java.util.Random;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
@@ -249,21 +250,27 @@ public class GameController {
 		
 		// On check déjà si c'est gratos
 		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
-			player.useCard(card);			
+			player.useCard(card);
+			this.checkDoubleProductCard(card);
 			this.next();
 		}
 		// Ensuite cout en piece
 		else if(card.getCostMoney() != 0 && card.getCostProduct().size() == 0) {
 			if(player.getMoney() >= card.getCostMoney()) {
 				player.setMoney(player.getMoney() - card.getCostMoney());
-				player.useCard(card);			
+				player.useCard(card);
+				this.checkDoubleProductCard(card);
 				this.next();
+			}
+			else {				
+				System.out.println("Il vous manque des tunasses");
 			}
 		}
 		// Enfin les cout en ressources
 		else {
 			ArrayList<Product> usedProducts = new ArrayList<Product>();
 			ArrayList<Product> playerProducts = player.getAllProducts();
+			ArrayList<Product> notFind = new ArrayList<Product>();
 			
 			if(playerProducts.size() > 0) {
 				for(Product neededProd : card.getCostProduct()) {
@@ -275,15 +282,39 @@ public class GameController {
 						// We found a product !
 						usedProducts.add(neededProd);
 					}
+					else {
+						notFind.add(neededProd);
+					}
 				}
 				
 				if(card.getCostProduct().size() == usedProducts.size()) {
 					// We have all the product to use this card
 					player.useCard(card);
+					this.checkDoubleProductCard(card);
 					this.next();
 				}
 				else {
 					System.out.println("Il vous manque des ressources !");
+					for(Product p : notFind) {
+						System.out.println("Besoin " + p.getClass().getName());
+					}
+					for(Product p : player.getAllProducts()) {						
+						System.out.println("Mes prods " + p.getClass().getName());
+					}
+					
+				}
+			}
+		}
+	}
+	
+	private void checkDoubleProductCard(Card card) {
+		if(card instanceof ProductCard) {
+			ProductCard pCard = (ProductCard) card;
+			
+			if(pCard.getProducts().size() > 1) {
+				if(pCard.getProducts().get(0).getClass().equals(pCard.getProducts().get(1).getClass()) == false) {
+					int nb = (Math.random() < 0.5) ? 0 : 1;
+					pCard.getProducts().remove(nb);
 				}
 			}
 		}
