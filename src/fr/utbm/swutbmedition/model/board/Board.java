@@ -34,4 +34,9 @@ public class Board {
     public Product getProduct() {
     	return this.product;
     }
+    
+    public int getLevel() {
+		return this.level;
+    	
+    }
 }

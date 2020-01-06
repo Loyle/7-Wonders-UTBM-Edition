@@ -7,15 +7,19 @@ import javax.swing.ImageIcon;
 
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
+import fr.utbm.swutbmedition.model.board.Board;
+import fr.utbm.swutbmedition.model.product.ManufacturedProduct;
 import fr.utbm.swutbmedition.model.product.Product;
+import fr.utbm.swutbmedition.model.product.RawMaterial;
 import javafx.scene.paint.Color;
 
 public class Guild extends Card {
 	
 	private String critere;
 
-    public Guild(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin) {
+    public Guild(String name, int age, Color color, int costMoney, ArrayList<Product> costProduct, ImageIcon skin, int nbPlayerMin, String critere) {
     	super(name,age,color,costMoney,costProduct,skin,nbPlayerMin);
+    	this.critere=critere;
     }
     
     public void addPlayer() {
@@ -32,22 +36,24 @@ public class Guild extends Card {
 	
 	public void effect(Game g ,Player p) {
 		
-		Predicate<Card> predicate;
+		Predicate<Card> predicate = null;
 		if (critere=="Scientific") {
-			 predicate = (Card c) -> (c instanceof Scientific);
+			predicate = (Card c) -> (c instanceof Scientific);
 		}else if(critere=="Civil") {
-			
+			predicate = (Card c) -> (c instanceof Civil);
 		}else if (critere=="Military") {
-			
+			predicate = (Card c) -> (c instanceof Military);			
 		}else if(critere=="Commercial"){
-			
+			predicate = (Card c) -> (c instanceof Commercial);
 		}else if(critere=="RawMaterial") {
-			
-		}else if(critere=="Merveille") {
-			
+			predicate = (Card c) -> (((ProductCard) c ).getProducts().get(0)instanceof RawMaterial);
 		}else if(critere=="RawManGuild") {
-			
+			predicate = (Card c) -> ((c instanceof Guild)||(((ProductCard) c ).getProducts().get(0)instanceof RawMaterial)||(((ProductCard) c ).getProducts().get(0)instanceof ManufacturedProduct));
+		}else if(critere=="ManufacturedProduct") {
+			predicate = (Card c) -> (((ProductCard) c ).getProducts().get(0)instanceof ManufacturedProduct);
 		}
+		
+		
 		
 		
 				
@@ -65,7 +71,7 @@ public class Guild extends Card {
 		
 		for(Card card : g.getPlayers().get(toCheck).getUsedCard()) {
 			if(predicate.test(card)) {
-				
+				++pointrightPlayer;
 			}
 		}
 		
@@ -85,7 +91,7 @@ public class Guild extends Card {
 	
 	@Override
 	public Card copy() {
-		return new Guild(name, age, color, costMoney, costProduct, skin, nbPlayerMin);
+		return new Guild(name, age, color, costMoney, costProduct, skin, nbPlayerMin,critere);
 	}
 
 }

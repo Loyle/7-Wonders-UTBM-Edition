@@ -112,7 +112,7 @@ public class CardLoader {
 					cards.add(new Scientific(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
 					break;
 				case "Guild":
-					cards.add(new Guild(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));					
+					cards.add(new Guild(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]),split[7]));					
 					break;					
 				default:
 					break;
