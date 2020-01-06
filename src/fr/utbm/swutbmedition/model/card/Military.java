@@ -24,7 +24,6 @@ public class Military extends Facilities {
 
 	@Override
 	protected void effect(Player p) {
-			
 	}
 	
 	public int getFx() {
