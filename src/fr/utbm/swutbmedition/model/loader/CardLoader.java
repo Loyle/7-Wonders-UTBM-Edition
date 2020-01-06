@@ -96,7 +96,8 @@ public class CardLoader {
                 
                 switch (split[1]) {
 				case "CardProduct":
-					cards.add(new ProductCard(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
+					ArrayList<Product> prods = CardLoader.loadProducts(effect);
+					cards.add(new ProductCard(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), prods));
 					break;
 				case "Civil":
 					cards.add(new Civil(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
@@ -134,5 +135,39 @@ public class CardLoader {
         }
         
         return cards;
+    }
+    private static ArrayList<Product> loadProducts(String prods) {
+    	String[] split = prods.split(",");
+    	
+    	ArrayList<Product> products = new ArrayList<Product>();
+    	
+    	for(int i = 0; i < split.length; i++) {
+    		switch (split[i]) {
+			case "food":
+				products.add(new Food());
+				break;
+			case "drink":
+				products.add(new Drink());
+				break;
+			case "pen":
+				products.add(new Pen());
+				break;
+			case "sheet":
+				products.add(new Sheet());
+				break;
+			case "computer":
+				products.add(new Computer());
+				break;
+			case "book":
+				products.add(new Book());
+				break;
+			case "desk":
+				products.add(new Desk());
+				break;
+			default:
+				break;
+			}
+    	}
+		return products;
     }
 }

@@ -52,9 +52,7 @@ public class Player {
     		this.usedCards.add(card);
     		return true;
     	}
-    	else {
-    		return false;
-    	}
+    	return false;
     }
 
     public void countScore() {
@@ -112,7 +110,7 @@ public class Player {
     		
     		if (card instanceof ProductCard) {
     			// On récupère les products de toutes les cards
-				products.add(((ProductCard) card).getProduct());
+				products.addAll(((ProductCard) card).getProducts());
 			}
     	}
     	
@@ -150,8 +148,6 @@ public class Player {
 				total += ((Military) card).getFx();
 			}
 		}
-		
-		
 		return total;
 	}
 }

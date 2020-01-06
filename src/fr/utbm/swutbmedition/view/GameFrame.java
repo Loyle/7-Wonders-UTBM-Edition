@@ -19,19 +19,15 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class GameFrame extends Scene {
+public class GameFrame extends BorderPane {
     private Game game;
     private GameController gameController;
     private MainFrame mainFrame;
-    private BorderPane root;
-    
     private VBox scoreboard;
     private HBox gameStatus;
     private HBox cardsLayout;
 
-    public GameFrame(MainFrame mainFrame, BorderPane root) {
-    	super(root,800,600);
-    	this.root = root;
+    public GameFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
     	
     	this.game = new Game();
@@ -39,24 +35,23 @@ public class GameFrame extends Scene {
     	
     	this.initFrame();
     }
-    
-    public void start() {
-    	this.gameController.initGame();
-    	this.gameController.start();
+      
+    public GameController getGameController() {
+    	return this.gameController;
     }
     
     public void initFrame() {
     	this.gameStatus = new HBox();
     	//this.gameStatus.getChildren().add(new Text("Tour n°" + this.game.getRound() + " | Age n°" + this.game.getAge()));
     	this.gameStatus.setAlignment(Pos.CENTER);
-    	this.root.setTop(this.gameStatus);
+    	this.setTop(this.gameStatus);
     	
     	
     	this.scoreboard = new VBox();
     	for(Player p : this.game.getPlayers()) {
     		this.scoreboard.getChildren().add(new Text(p.getName() + " : " + p.getCreditsECTS()));    		
     	}
-    	this.root.setRight(this.scoreboard);
+    	this.setRight(this.scoreboard);
     	
     	HBox layout = new HBox();
     	Button btn = new Button("Click ici ca te fais jouer");
@@ -67,13 +62,13 @@ public class GameFrame extends Scene {
 		});
     	layout.getChildren().add(btn);
     	
-    	this.root.setCenter(layout);
+    	this.setCenter(layout);
     	
     	
     	this.cardsLayout = new HBox();
     	this.cardsLayout.setSpacing(1);
     	this.cardsLayout.setAlignment(Pos.CENTER);
-    	this.root.setBottom(this.cardsLayout);
+    	this.setBottom(this.cardsLayout);
     }
     
     public void refreshScoreboard() {
