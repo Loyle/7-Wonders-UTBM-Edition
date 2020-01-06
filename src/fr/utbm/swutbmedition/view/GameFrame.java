@@ -5,11 +5,15 @@ import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -32,10 +36,12 @@ public class GameFrame extends Scene {
     	
     	this.game = new Game();
     	this.gameController = new GameController(this, this.game);
+    	
+    	this.initFrame();
+    }
+    
+    public void start() {
     	this.gameController.initGame();
-    	
-    	initFrame();
-    	
     	this.gameController.start();
     }
     
@@ -65,7 +71,7 @@ public class GameFrame extends Scene {
     	
     	
     	this.cardsLayout = new HBox();
-    	this.cardsLayout.setSpacing(0);
+    	this.cardsLayout.setSpacing(1);
     	this.cardsLayout.setAlignment(Pos.CENTER);
     	this.root.setBottom(this.cardsLayout);
     }
@@ -89,6 +95,7 @@ public class GameFrame extends Scene {
 			Button btn = new Button(card.getName());
 			btn.setMinHeight(100);
 			btn.setMaxWidth(Double.MAX_VALUE);
+			btn.setBackground(new Background(new BackgroundFill(card.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
 	    	btn.setOnMouseClicked(new EventHandler<MouseEvent >() {
 	    		public void handle(MouseEvent e) {
 	    			gameController.useCard(currentPlayer, card);

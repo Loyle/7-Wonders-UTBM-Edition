@@ -49,6 +49,9 @@ public abstract class Card {
     public ArrayList<Product> getCostProduct() {
     	return this.costProduct;
     }
+    public Color getColor() {
+		return this.color;
+	}
     
     protected abstract void effect();
 	protected abstract void effect(Player p);

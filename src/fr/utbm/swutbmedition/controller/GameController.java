@@ -1,6 +1,7 @@
 package fr.utbm.swutbmedition.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import fr.utbm.swutbmedition.model.Game;
@@ -44,7 +45,7 @@ public class GameController {
     	
     	for(Player p : this.game.getPlayers()) {
     		for(Card c : p.getHandCards()) {
-    			System.out.println(p.getName() + " => " + c.getName());    			
+    			//System.out.println(p.getName() + " => " + c.getName());    			
     		}
     	}
     }
@@ -54,11 +55,14 @@ public class GameController {
     	if(this.game.getPlayers().size() < 2)
     		return;
     	
-    	// Voir pour melanger le tableau de player pour que l'ordre soit random
+    	// melanger le tableau de player pour que l'ordre soit random
+    	Collections.shuffle(this.game.getPlayers());
+    	
     	this.playerID = 0;
     	this.game.setCurrentPlayer(this.game.getPlayers().get(playerID));
     	
     	this.gameFrame.refreshGameStatus();
+    	this.gameFrame.refreshScoreboard();
     	
     	this.gameFrame.displayBoard(this.game.getCurrentPlayer());
     	
@@ -67,6 +71,9 @@ public class GameController {
     }
     
     public void next() {
+    	if(!this.game.isStart())
+			return;
+    	
     	this.playerID++;
     	
 		if(this.playerID >= this.game.getPlayers().size()) {
@@ -164,7 +171,58 @@ public class GameController {
 	}
     
     private void doConflicts() {
- 		// Voir comment faire ca
+ 		// Victoire : 1 / 3 / 5 pts de victoire fct de l'age
+    	// Defaire : -1
+    	// Egalité : 0
+    	// Check a droite et à gauche
+    	
+    	for(Player p : this.game.getPlayers()) {
+    		int pos = this.game.getPlayers().indexOf(p);
+ 
+    		
+    		
+    		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+    		int toCheck = pos + 1;
+    		
+    		if(pos == this.game.getPlayers().size() - 1)
+    			toCheck = 0;
+    		
+    		if(p.getNumberFx() > this.game.getPlayers().get(toCheck).getNumberFx()) {
+    			int toAdd = 1;
+    			if(this.game.getAge() == 2)
+    				toAdd = 3;
+    			else if(this.game.getAge() == 3)
+    				toAdd = 5;
+    			
+    			p.addConflicts(toAdd);
+    		}
+    		else if(p.getNumberFx() < this.game.getPlayers().get(toCheck).getNumberFx()) 
+    			p.addConflicts(-1);
+    		else 
+    			p.addConflicts(0);
+    		
+    		
+    		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+    		toCheck = pos - 1;
+    		
+    		if(pos == 0)
+    			toCheck = this.game.getPlayers().size() - 1;
+    		
+    		if(p.getNumberFx() > this.game.getPlayers().get(toCheck).getNumberFx()) {
+    			int toAdd = 1;
+    			if(this.game.getAge() == 2)
+    				toAdd = 3;
+    			else if(this.game.getAge() == 3)
+    				toAdd = 5;
+    			
+    			p.addConflicts(toAdd);
+    		}
+    		else if(p.getNumberFx() < this.game.getPlayers().get(toCheck).getNumberFx())
+    			p.addConflicts(-1);
+    		else
+    			p.addConflicts(0);
+    	}
+    	
  	}
 
     private boolean checkEnd() {
@@ -184,7 +242,9 @@ public class GameController {
     }
 
 	public void useCard(Player player, Card card) {
-		// Ici faut faire 10000 check
+		if(!this.game.isStart())
+			return;
+		
 		// Regarder si il a les ressources etc...
 		
 		// On check déjà si c'est gratos

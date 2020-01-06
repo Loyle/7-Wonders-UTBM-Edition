@@ -26,6 +26,7 @@ public class MainFrame {
 	
 	public void showGameFrame() {
 		this.primaryStage.setScene(this.gameFrame);
+		this.gameFrame.start();
 	}
 	
 	public void showRulesFrame() {

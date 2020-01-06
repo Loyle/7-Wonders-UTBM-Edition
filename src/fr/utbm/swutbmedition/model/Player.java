@@ -7,6 +7,7 @@ import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.model.card.Civil;
 import fr.utbm.swutbmedition.model.card.Commercial;
 import fr.utbm.swutbmedition.model.card.Guild;
+import fr.utbm.swutbmedition.model.card.Military;
 import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.card.Scientific;
 import fr.utbm.swutbmedition.model.product.Product;
@@ -18,7 +19,6 @@ public class Player {
     private ArrayList<Card> handCards;
     private Board board;
     private int money;
-    private int fx;
     private int creditsECTS;
     private ArrayList<Integer> conflicts;
 
@@ -28,8 +28,7 @@ public class Player {
         this.usedCards = new ArrayList<Card>();
         this.handCards = new ArrayList<Card>();
         this.board = new Board();
-        this.money = 0;
-        this.fx = 0;
+        this.money = 3;
         this.creditsECTS = 0;
         this.conflicts = new ArrayList<Integer>();
     }
@@ -39,8 +38,7 @@ public class Player {
         this.usedCards = new ArrayList<Card>();
         this.handCards = new ArrayList<Card>();
         this.board = new Board();
-        this.money = 0;
-        this.fx = 0;
+        this.money = 3;
         this.creditsECTS = 0;
         this.conflicts = new ArrayList<Integer>();
     }
@@ -143,5 +141,17 @@ public class Player {
 	}
 	public void setMoney(int money) {
 		this.money = money;
+	}
+	public int getNumberFx() {
+		int total = 0;
+		
+		for(Card card : this.usedCards) {
+			if (card instanceof Military) {
+				total += ((Military) card).getFx();
+			}
+		}
+		
+		
+		return total;
 	}
 }

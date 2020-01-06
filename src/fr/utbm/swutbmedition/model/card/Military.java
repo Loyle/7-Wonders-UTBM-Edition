@@ -27,6 +27,10 @@ public class Military extends Facilities {
 			
 	}
 	
+	public int getFx() {
+		return this.fx;
+	}
+	
 	@Override
 	public Card copy() {
 		return new Military(name, age, color, costMoney, costProduct, skin, nbPlayerMin, fx);
