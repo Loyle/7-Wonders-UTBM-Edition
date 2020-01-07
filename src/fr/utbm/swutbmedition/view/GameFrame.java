@@ -18,6 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -34,12 +35,14 @@ public class GameFrame extends BorderPane {
     private GridPane otherBoardsLayout;
     private HBox actionsLayout;
     private Card selectedCard;
+    private Text textAction;
 
     public GameFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
     	
     	this.game = new Game();
     	this.gameController = new GameController(this, this.game);
+    	this.selectedCard = null;
     	
     	this.initFrame();
     }
@@ -79,7 +82,9 @@ public class GameFrame extends BorderPane {
     	Button btnBuild = new Button("Construire");
     	Button btnSell = new Button("Vendre pour 3€");
     	Button btnBuildWonder = new Button("Constuire la merveille");
-    	Text textAction = new Text("");
+    	textAction = new Text("");
+    	
+    	
     	
     	btnBuild.setMaxWidth(Double.MAX_VALUE);
     	btnSell.setMaxWidth(Double.MAX_VALUE);
@@ -88,6 +93,16 @@ public class GameFrame extends BorderPane {
     	btnBuild.setOnAction(e -> {
     		if (selectedCard != null) {
     			gameController.useCard(game.getCurrentPlayer(), selectedCard);
+    			selectedCard = null;
+    		}
+    			else {
+    				textAction.setText("Il faut sélectionner une carte");
+    			}
+    	});
+    	
+    	btnSell.setOnAction(e -> {
+    		if (selectedCard != null) {
+    			gameController.sellCard(game.getCurrentPlayer(), selectedCard);
     			selectedCard = null;
     		}
     			else {
@@ -136,9 +151,9 @@ public class GameFrame extends BorderPane {
     	VBox.setVgrow(bottomLayout, Priority.ALWAYS);
     	
     	this.gameStatus = new HBox();
-    	//this.gameStatus.getChildren().add(new Text("Tour n°" + this.game.getRound() + " | Age n°" + this.game.getAge()));
-    	//this.gameStatus.setAlignment(Pos.CENTER);
-    	//this.setTop(this.gameStatus);
+    	this.gameStatus.getChildren().add(new Text("Tour n°" + this.game.getRound() + " | Age n°" + this.game.getAge()));
+    	this.gameStatus.setAlignment(Pos.CENTER);
+    	this.setTop(this.gameStatus);
     	
     	
     	/*HBox layout = new HBox();
@@ -173,7 +188,10 @@ public class GameFrame extends BorderPane {
 			btn.setMinHeight(100);
 			btn.setMaxWidth(Double.MAX_VALUE);
 			btn.setBackground(new Background(new BackgroundFill(card.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
-	    	btn.setOnAction(e -> selectedCard = card);
+	    	btn.setOnAction(e -> {
+	    		selectedCard = card;
+	    		textAction.setText("");
+	    	});
 	    	HBox.setHgrow(btn, Priority.ALWAYS);
 	    	this.playerHand.getChildren().add(btn);
 		}

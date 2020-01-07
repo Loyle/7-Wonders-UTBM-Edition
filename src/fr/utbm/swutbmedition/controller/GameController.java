@@ -308,6 +308,7 @@ public class GameController {
 	}
 	
 	private void checkDoubleProductCard(Card card) {
+
 		if(card instanceof ProductCard) {
 			ProductCard pCard = (ProductCard) card;
 			
@@ -318,5 +319,13 @@ public class GameController {
 				}
 			}
 		}
+	}
+
+	public void sellCard(Player player, Card card) {
+		if(!this.game.isStart())
+			return;
+		
+		player.sellCard(card);
+		next();
 	}
 }

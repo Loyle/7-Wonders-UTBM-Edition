@@ -55,7 +55,13 @@ public class Player {
     	}
     	return false;
     }
-
+    public void sellCard(Card card) {
+    	if(this.handCards.contains(card)) {
+    		this.handCards.remove(card);
+    		this.setMoney(3);
+    	}
+    }
+    
     public void countScore(Game game) {
     	// Les pts de conflits sont converti en pt de victoire
     	int conflictsPoints = 0;
