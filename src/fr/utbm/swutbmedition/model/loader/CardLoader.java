@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.model.card.Civil;
@@ -118,7 +119,7 @@ public class CardLoader {
 					break;
 				}
 
-            }
+            }	
 			
         } catch (FileNotFoundException e) {
             e.printStackTrace();

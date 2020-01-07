@@ -7,6 +7,7 @@ import java.util.Random;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
@@ -125,6 +126,19 @@ public class GameController {
 
 	public void distributeCards() {
     	// Distribue les cartes aux joueurs en fct de l'age
+		ArrayList<Card> toRemove = new ArrayList<Card>();
+		int nbToChoose = 9-(this.game.getPlayers().size()+2);
+		for(Card c: this.game.getExistingCards()) {
+			if(c instanceof Guild) {
+				for(int j=0;j<nbToChoose;++j) {
+					Random R = new Random();
+					int k = R.nextInt(9);
+					toRemove.add(this.game.getExistingCards().get(k));
+				}
+			}
+		}
+
+		this.game.getExistingCards().removeAll(toRemove);
     	for(Player p : this.game.getPlayers()) {
     		// On clear la main actuelle
     		p.getHandCards().clear();
