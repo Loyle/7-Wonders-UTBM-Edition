@@ -11,7 +11,7 @@ import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
-import sun.security.jca.GetInstance.Instance;
+//import sun.security.jca.GetInstance.Instance;
 
 public class GameController {
 
@@ -65,7 +65,7 @@ public class GameController {
     	this.gameFrame.refreshGameStatus();
     	this.gameFrame.refreshScoreboard();
     	
-    	this.gameFrame.displayBoard(this.game.getCurrentPlayer());
+    	this.gameFrame.displayHand(this.game.getCurrentPlayer());
     	
     	
     	this.game.setStart(true);
@@ -119,7 +119,7 @@ public class GameController {
 		this.gameFrame.refreshGameStatus();
 
 		// On affiche le board du joueurs suivant
-		this.gameFrame.displayBoard(this.game.getCurrentPlayer());
+		this.gameFrame.displayHand(this.game.getCurrentPlayer());
 		
 	}
 
