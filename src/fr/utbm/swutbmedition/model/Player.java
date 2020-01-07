@@ -1,5 +1,6 @@
 package fr.utbm.swutbmedition.model;
 
+import java.net.InterfaceAddress;
 import java.util.*;
 
 import fr.utbm.swutbmedition.model.board.Board;
@@ -76,7 +77,8 @@ public class Player {
         int scientificPoints = 0;
         int commercialPoints = 0;
         int guildPoints = 0;
-        
+        int nbCs = 0, nbTm=0,nbCg=0;
+        ArrayList<Integer> symbole = null;
     	for(Card card: this.usedCards) {
     		if(card instanceof Civil) {
     			// les cartes civils on des pts (credit ECTS)
@@ -84,8 +86,15 @@ public class Player {
     		}
     		else if(card instanceof Scientific) {
     			// Pt de cartes scientifique : Famille de symbole identiques et Groupe de 3 symboles différents
-    			scientificPoints += 0;
     			// Donc ici on va juste stocker les symboles des cartes, on fera le calcul après la boucle for
+    			
+    			if(((Scientific)card).getSymbole().equals("CS")) {
+    				symbole.add(++nbCs);
+    			}else if(((Scientific)card).getSymbole().equals("TM")) {
+    				symbole.add(++nbTm);
+    			}else if(((Scientific)card).getSymbole().equals("CG")) {
+    				symbole.add(++nbCg);
+    			}
     		}
     		else if(card instanceof Commercial) {
     			// Les cartes commercials d'age III rapporte 2 points chacune
@@ -98,6 +107,9 @@ public class Player {
     			// Depend de ses voisin etc... CHIANT
     		}
     	}
+    	
+    	Integer var = symbole.stream().min(Integer::compare).get(); 
+    	scientificPoints= nbCg*nbCg+nbCs*nbCs+nbTm*nbTm+7*var;
     	this.creditsECTS = conflictsPoints + treasurePoints + wonderPoints + civilPoints + scientificPoints + commercialPoints + guildPoints;
     }
     public ArrayList<Product> getAllProducts() {

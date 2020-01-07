@@ -33,4 +33,8 @@ public class Scientific extends Facilities {
 	public Card copy() {
 		return new Scientific(name, age, color, costMoney, costProduct, skin, nbPlayerMin, symbole);
 	}
+	
+	public String getSymbole() {
+		return this.symbole;
+	}
 }
