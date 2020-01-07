@@ -78,7 +78,11 @@ public class Player {
         int commercialPoints = 0;
         int guildPoints = 0;
         int nbCs = 0, nbTm=0,nbCg=0;
-        ArrayList<Integer> symbole = null;
+        ArrayList<Integer> symbole = new ArrayList<Integer>();
+        symbole.add(nbCs);
+        symbole.add(nbCg);
+        symbole.add(nbTm);
+        
     	for(Card card: this.usedCards) {
     		if(card instanceof Civil) {
     			// les cartes civils on des pts (credit ECTS)
