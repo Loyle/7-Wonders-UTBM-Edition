@@ -35,31 +35,8 @@ public class Guild extends Card {
 	}
 	
 	public void effect(Game g ,Player p) {
-		Predicate<Card> predicate = null;
-		if (critere=="Scientific") {
-			System.out.println("Critere -> SCIENTIFIC");
-			predicate = (Card c) -> (c instanceof Scientific);
-		}else if(critere=="Civil") {
-			System.out.println("Critere -> CIVIL");
-			predicate = (Card c) -> (c instanceof Civil);
-		}else if (critere=="Military") {
-			System.out.println("Critere -> MILITARY");
-			predicate = (Card c) -> (c instanceof Military);			
-		}else if(critere=="Commercial"){
-			System.out.println("Critere -> COMMERCIAL");
-			predicate = (Card c) -> (c instanceof Commercial);
-		}else if(critere=="RawMaterial") {
-			System.out.println("Critere -> RAWMAT");
-			predicate = (Card c) -> (((ProductCard) c ).getProducts().get(0)instanceof RawMaterial);
-		}else if(critere=="RawManGuild") {
-			System.out.println("Critere -> TRIPLE CARD");
-			predicate = (Card c) -> ((c instanceof Guild)||(((ProductCard) c ).getProducts().get(0)instanceof RawMaterial)||(((ProductCard) c ).getProducts().get(0)instanceof ManufacturedProduct));
-		}else if(critere=="ManufacturedProduct") {
-			System.out.println("Critere -> MANPRODUCT");
-			predicate = (Card c) -> (((ProductCard) c ).getProducts().get(0)instanceof ManufacturedProduct);
-		}
-						
-		int pointLeftPlayer=0, pointrightPlayer=0;
+		
+		int pointLeftPlayer=0, pointRightPlayer=0;
 		
 		int pos = g.getPlayers().indexOf(p);
 		
@@ -70,9 +47,67 @@ public class Guild extends Card {
 			toCheck = 0;
 		
 		for(Card card : g.getPlayers().get(toCheck).getUsedCard()) {
-			if(predicate.test(card)) {
-				System.out.println("+1");
-				++pointrightPlayer;
+			System.out.println(card.getName());
+			if (critere.equalsIgnoreCase("Scientific")) {
+				System.out.println("Critere -> SCIENTIFIC");
+				if(card instanceof Scientific) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("Civil")) {
+				System.out.println("Critere -> CIVIL");
+				if(card instanceof Civil) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+			}else if (critere.equalsIgnoreCase("Military")) {
+				System.out.println("Critere -> MILITARY");
+				if(card instanceof Military) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("Commercial")){
+				System.out.println("Critere -> COMMERCIAL");
+				if(card instanceof Commercial) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("RawMaterial")) {
+				System.out.println("Critere -> RAWMAT");
+				if(((ProductCard)card).getProducts().get(0)instanceof RawMaterial) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("RawManGuild")) {
+				System.out.println("Critere -> TRIPLE CARD");
+				if(((card instanceof Guild)||(((ProductCard) card ).getProducts().get(0)instanceof RawMaterial)||(((ProductCard) card ).getProducts().get(0)instanceof ManufacturedProduct))) {
+					System.out.println("+1");
+					++pointRightPlayer;
+				}
+				
+			}else if(critere.equalsIgnoreCase("ManufacturedProduct")) {
+				System.out.println("Critere -> MANPRODUCT");
+				if(((ProductCard)card).getProducts().get(0)instanceof ManufacturedProduct) {
+					System.out.println("+1");
+					pointRightPlayer +=2;
+				}
+			}
+			
+		}
+		
+		if (critere.equalsIgnoreCase("Merveille")) {
+			
+			System.out.println("Critere -> Merveille");
+			System.out.println("+1");
+			pointRightPlayer+= g.getPlayers().get(toCheck).getBoard().getLevel();
+			
+		}else if(critere.equalsIgnoreCase("Conflict")) {
+			System.out.println("Critere -> Conflict");
+			System.out.println("+1");
+			for(int i : g.getPlayers().get(toCheck).getConflicts()) {
+				if(i==(-1)) {
+					++pointRightPlayer;
+				}
 			}
 		}
 		
@@ -82,10 +117,79 @@ public class Guild extends Card {
 		
 		if(pos == 0)
 			toCheck = g.getPlayers().size() - 1;
+		for(Card card : g.getPlayers().get(toCheck).getUsedCard()) {
+			System.out.println(card.getName());
+			if (critere.equalsIgnoreCase("Scientific")) {
+				System.out.println("Critere -> SCIENTIFIC");
+				if(card instanceof Scientific) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("Civil")) {
+				System.out.println("Critere -> CIVIL");
+				if(card instanceof Civil) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+			}else if (critere.equalsIgnoreCase("Military")) {
+				System.out.println("Critere -> MILITARY");
+				if(card instanceof Military) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("Commercial")){
+				System.out.println("Critere -> COMMERCIAL");
+				if(card instanceof Commercial) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("RawMaterial")) {
+				System.out.println("Critere -> RAWMAT");
+				if(((ProductCard)card).getProducts().get(0)instanceof RawMaterial) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+			}else if(critere.equalsIgnoreCase("RawManGuild")) {
+				System.out.println("Critere -> TRIPLE CARD");
+				if(((card instanceof Guild)||(((ProductCard) card ).getProducts().get(0)instanceof RawMaterial)||(((ProductCard) card ).getProducts().get(0)instanceof ManufacturedProduct))) {
+					System.out.println("+1");
+					++pointLeftPlayer;
+				}
+				
+			}else if(critere.equalsIgnoreCase("ManufacturedProduct")) {
+				System.out.println("Critere -> MANPRODUCT");
+				if(((ProductCard)card).getProducts().get(0)instanceof ManufacturedProduct) {
+					System.out.println("+1");
+					pointLeftPlayer +=2;
+				}
+			}
+			
+		}
 		
+		if (critere.equalsIgnoreCase("Merveille")) {
+			
+			System.out.println("Critere -> Merveille");
+			System.out.println("+1");
+			pointLeftPlayer+= g.getPlayers().get(toCheck).getBoard().getLevel();
+			
+		}else if(critere.equalsIgnoreCase("Conflict")) {
+			System.out.println("Critere -> Conflict");
+			System.out.println("+1");
+			for(int i : g.getPlayers().get(toCheck).getConflicts()) {
+				if(i==(-1)) {
+					++pointLeftPlayer;
+				}
+			}
+		}
 		
-		p.setCreditsECTS(p.getCreditsECTS()+pointLeftPlayer+pointrightPlayer);
-		
+	if (critere.equalsIgnoreCase("Merveille")) {
+			int pointOwnWonders =0;
+			System.out.println("Critere -> Merveille");
+			System.out.println("+1");
+			pointOwnWonders= p.getBoard().getLevel();
+			
+		}
+		p.setCreditsECTS(p.getCreditsECTS()+pointLeftPlayer+pointRightPlayer);
 		
 	}
 	

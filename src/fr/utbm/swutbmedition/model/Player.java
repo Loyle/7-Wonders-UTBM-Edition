@@ -156,4 +156,12 @@ public class Player {
 		}
 		return total;
 	}
+	public ArrayList<Integer> getConflicts() {
+		// TODO Auto-generated method stub
+		return this.conflicts;
+	}
+	public Board getBoard() {
+		// TODO Auto-generated method stub
+		return this.board;
+	}
 }
