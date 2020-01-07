@@ -12,7 +12,7 @@ public class MainFrame {
 	private RulesFrame rulesFrames;
 	private Stage primaryStage;
 	
-	public MainFrame(Stage primaryStage) throws FileNotFoundException {
+	public MainFrame(Stage primaryStage)  {
 		this.primaryStage = primaryStage;
 				
 		this.menuFrame = new MenuFrame(this);

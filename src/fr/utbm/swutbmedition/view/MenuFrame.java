@@ -27,18 +27,23 @@ public class MenuFrame extends BorderPane {
     private VBox layoutSettings;
     private VBox layoutBottom;
 
-    public MenuFrame(MainFrame mainFrame) throws FileNotFoundException {
+    public MenuFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
     	this.menuController = new MenuController(this);
     	
-    	this.initFrame();
+    	try {
+			this.initFrame();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     public void initFrame() throws FileNotFoundException {
     	Text title = new Text("UTBM Edition");
     	title.setFont(Font.font(40));
     	title.setTextAlignment(TextAlignment.CENTER);
     	
-    	FileInputStream inputImage = new FileInputStream("data/images/logo7w.png");
+    	FileInputStream inputImage = new FileInputStream("data/images/logo7w.PNG");
     	Image logoImage = new Image(inputImage);
     	ImageView viewLogoImage = new ImageView(logoImage);
     	viewLogoImage.fitWidthProperty().bind(mainFrame.getPrimaryStage().widthProperty());
