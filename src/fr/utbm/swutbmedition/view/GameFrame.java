@@ -1,5 +1,7 @@
 package fr.utbm.swutbmedition.view;
 
+import java.util.HashMap;
+
 import fr.utbm.swutbmedition.controller.GameController;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
@@ -7,6 +9,7 @@ import fr.utbm.swutbmedition.model.card.Card;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,12 +24,17 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class GameFrame extends BorderPane {
     private Game game;
     private GameController gameController;
     private MainFrame mainFrame;
+    
+    private HashMap<Card, Button> cardsButton;
     
     private GridPane playerBoardLayout;
     private VBox scoreboard;
@@ -80,15 +88,20 @@ public class GameFrame extends BorderPane {
     	handAndActionLayout.getChildren().add(this.playerHand);
     	
     	Button btnBuild = new Button("Construire");
+    	btnBuild.setMaxWidth(Double.MAX_VALUE);
+    	btnBuild.setPrefHeight(80);
+    	
     	Button btnSell = new Button("Vendre pour 3€");
+    	btnSell.setMaxWidth(Double.MAX_VALUE);
+    	btnSell.setPrefHeight(80);
+
     	Button btnBuildWonder = new Button("Constuire la merveille");
+    	btnBuildWonder.setMaxWidth(Double.MAX_VALUE);
+    	btnBuildWonder.setPrefHeight(80);
+    	
     	textAction = new Text("");
     	
     	
-    	
-    	btnBuild.setMaxWidth(Double.MAX_VALUE);
-    	btnSell.setMaxWidth(Double.MAX_VALUE);
-    	btnBuildWonder.setMaxWidth(Double.MAX_VALUE);
     	
     	btnBuild.setOnAction(e -> {
     		if (selectedCard != null) {
@@ -111,9 +124,13 @@ public class GameFrame extends BorderPane {
     	});
     	
     	this.actionsLayout = new HBox();
-    	actionsLayout.getChildren().addAll(btnBuild,btnSell,btnBuildWonder);
-    	actionsLayout.setAlignment(Pos.CENTER);
-    	actionsLayout.setSpacing(20);
+    	this.actionsLayout.getChildren().addAll(btnBuild,btnSell,btnBuildWonder);
+    	this.actionsLayout.setAlignment(Pos.CENTER);
+    	this.actionsLayout.setSpacing(20);
+    	this.actionsLayout.setPadding(new Insets(20,20,20,20));;
+    	HBox.setHgrow(btnBuild, Priority.ALWAYS);
+    	HBox.setHgrow(btnSell, Priority.ALWAYS);
+    	HBox.setHgrow(btnBuildWonder, Priority.ALWAYS);
     	
     	VBox blockAction = new VBox(20);
     	blockAction.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -138,6 +155,9 @@ public class GameFrame extends BorderPane {
     	
     	// Scoreboard
     	this.scoreboard = new VBox();
+    	this.scoreboard.setPadding(new Insets(40,40,40,40));
+    	this.scoreboard.setAlignment(Pos.CENTER);
+    	this.scoreboard.setSpacing(30);
     	this.scoreboard.setMaxWidth(300);
     	this.scoreboard.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
     	bottomLayout.getChildren().add(this.scoreboard);
@@ -172,7 +192,9 @@ public class GameFrame extends BorderPane {
     	this.scoreboard.getChildren().clear();
     	for(Player p : this.game.getPlayers()) {
     		p.countScore(game);
-    		this.scoreboard.getChildren().add(new Text(p.getName() + " : " + p.getCreditsECTS()));   		
+    		Text text = new Text(p.getName() + " : " + p.getCreditsECTS());
+    		text.setFont(Font.font("Arial",FontWeight.NORMAL,FontPosture.REGULAR,20));
+    		this.scoreboard.getChildren().add(text);   		
     	}
     }
     public void refreshGameStatus() {
@@ -183,14 +205,28 @@ public class GameFrame extends BorderPane {
 
 	public void displayHand(Player currentPlayer) {
 		this.playerHand.getChildren().clear();
+		
+		this.cardsButton = new HashMap<Card, Button>();
+		
 		for(Card card : currentPlayer.getHandCards()) {
 			Button btn = new Button(card.getName());
+			this.cardsButton.put(card, btn);
 			btn.setMinHeight(100);
 			btn.setMaxWidth(Double.MAX_VALUE);
 			btn.setBackground(new Background(new BackgroundFill(card.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
+			btn.setCursor(Cursor.HAND);
 	    	btn.setOnAction(e -> {
-	    		selectedCard = card;
-	    		textAction.setText("");
+	    		if(this.selectedCard != null) {
+	    			this.cardsButton.get(this.selectedCard).setStyle("");
+	    		}
+	    		this.selectedCard = card;
+	    		
+	    		btn.setStyle("-fx-padding: 10;" + 
+                        "-fx-border-style: solid outside;" + 
+                        "-fx-border-width: 5;" +
+                        "-fx-border-radius: 1;" + 
+                        "-fx-border-color: black;");
+	    		this.textAction.setText("");
 	    	});
 	    	HBox.setHgrow(btn, Priority.ALWAYS);
 	    	this.playerHand.getChildren().add(btn);
