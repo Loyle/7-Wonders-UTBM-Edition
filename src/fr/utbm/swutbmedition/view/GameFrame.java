@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -32,6 +33,7 @@ public class GameFrame extends BorderPane {
     private HBox playerHand;
     private GridPane otherBoardsLayout;
     private HBox actionsLayout;
+    private Card selectedCard;
 
     public GameFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
@@ -74,9 +76,35 @@ public class GameFrame extends BorderPane {
     	
     	handAndActionLayout.getChildren().add(this.playerHand);
     	
+    	Button btnBuild = new Button("Construire");
+    	Button btnSell = new Button("Vendre pour 3€");
+    	Button btnBuildWonder = new Button("Constuire la merveille");
+    	Text textAction = new Text("");
+    	
+    	btnBuild.setMaxWidth(Double.MAX_VALUE);
+    	btnSell.setMaxWidth(Double.MAX_VALUE);
+    	btnBuildWonder.setMaxWidth(Double.MAX_VALUE);
+    	
+    	btnBuild.setOnAction(e -> {
+    		if (selectedCard != null) {
+    			gameController.useCard(game.getCurrentPlayer(), selectedCard);
+    			selectedCard = null;
+    		}
+    			else {
+    				textAction.setText("Il faut sélectionner une carte");
+    			}
+    	});
+    	
     	this.actionsLayout = new HBox();
-    	this.actionsLayout.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-    	handAndActionLayout.getChildren().add(this.actionsLayout);
+    	actionsLayout.getChildren().addAll(btnBuild,btnSell,btnBuildWonder);
+    	actionsLayout.setAlignment(Pos.CENTER);
+    	actionsLayout.setSpacing(20);
+    	
+    	VBox blockAction = new VBox(20);
+    	blockAction.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+    	blockAction.getChildren().addAll(actionsLayout,textAction);
+    	
+    	handAndActionLayout.getChildren().add(blockAction);
     	
     	this.playerHand.setMaxHeight(Double.MAX_VALUE);
     	this.actionsLayout.setMaxHeight(Double.MAX_VALUE);
@@ -101,7 +129,6 @@ public class GameFrame extends BorderPane {
     	
     	HBox.setHgrow(this.otherBoardsLayout, Priority.ALWAYS);
     	HBox.setHgrow(this.scoreboard, Priority.ALWAYS);
-    	
     	
     	topLayout.setMaxHeight(Double.MAX_VALUE);
     	bottomLayout.setMaxHeight(Double.MAX_VALUE);
@@ -139,21 +166,16 @@ public class GameFrame extends BorderPane {
     }
 
 
-	public void displayBoard(Player currentPlayer) {
+	public void displayHand(Player currentPlayer) {
 		this.playerHand.getChildren().clear();
 		for(Card card : currentPlayer.getHandCards()) {
 			Button btn = new Button(card.getName());
 			btn.setMinHeight(100);
 			btn.setMaxWidth(Double.MAX_VALUE);
 			btn.setBackground(new Background(new BackgroundFill(card.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
-	    	btn.setOnMouseClicked(new EventHandler<MouseEvent >() {
-	    		public void handle(MouseEvent e) {
-	    			gameController.useCard(currentPlayer, card);
-	    		}
-			});
+	    	btn.setOnAction(e -> selectedCard = card);
 	    	HBox.setHgrow(btn, Priority.ALWAYS);
 	    	this.playerHand.getChildren().add(btn);
 		}
 	}
-
 }
