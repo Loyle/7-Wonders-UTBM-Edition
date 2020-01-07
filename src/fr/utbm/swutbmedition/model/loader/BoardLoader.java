@@ -7,6 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.utbm.swutbmedition.model.board.Board;
+import fr.utbm.swutbmedition.model.board.Step;
+import fr.utbm.swutbmedition.model.product.Book;
+import fr.utbm.swutbmedition.model.product.Computer;
+import fr.utbm.swutbmedition.model.product.Desk;
+import fr.utbm.swutbmedition.model.product.Drink;
+import fr.utbm.swutbmedition.model.product.Food;
+import fr.utbm.swutbmedition.model.product.Pen;
+import fr.utbm.swutbmedition.model.product.Product;
+import fr.utbm.swutbmedition.model.product.Sheet;
 
 public class BoardLoader {
 	public static ArrayList<ArrayList<Board>> loadBoard() {
@@ -19,11 +28,45 @@ public class BoardLoader {
         
         try {
 			br = new BufferedReader(new FileReader(csvFile));
+		
+		
 			br.readLine(); // On lit la première ligne qui est la ligne d'entête
+			String[] split = null;
 			while ((line = br.readLine()) != null) {
                 
                 // use comma as separator
-                String[] split = line.split(cvsSplitBy);   
+                 split = line.split(cvsSplitBy);   
+                 ArrayList<Board> array = new ArrayList<Board>();
+                 Product product;
+                 switch (split[3]) {
+                 case "drink":
+                	 product= new Drink();
+                	 break;
+                 case "sheet":
+                	 product = new Sheet();
+                	 break;
+                 case "desk":
+                	 product= new Desk();
+                	 break;
+                 case "PC":
+                	 product = new Computer();
+                	 break;
+                 case "book":
+                	 product = new Book();
+                	 break;
+                 case "food":
+                	 product = new Food();
+                	 break;
+                 case "pen":
+                	 product = new Pen();
+                	 break;
+                 default :
+                	 product = null; 
+                 }
+                 //Trouver moyen avec JSON;
+                 ArrayList<Step> steps = new ArrayList<Step>();
+                 array.add(new Board(split[1],split[2],product,steps));
+                 boards.add(array);
 			}
 			
         } catch (FileNotFoundException e) {
