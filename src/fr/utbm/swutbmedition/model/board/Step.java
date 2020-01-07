@@ -28,4 +28,5 @@ public class Step {
 	public void setCostProduct(ArrayList<Product> costProduct) {
 		this.costProduct = costProduct;
 	}
+	
 }

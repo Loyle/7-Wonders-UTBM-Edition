@@ -101,7 +101,15 @@ public class GameFrame extends BorderPane {
     	
     	textAction = new Text("");
     	
-    	
+    	btnBuildWonder.setOnAction(e ->{
+    		if (selectedCard != null) {
+    			textAction.setText(gameController.buildWonder(game.getCurrentPlayer(), selectedCard));
+    			selectedCard = null;
+    		}
+    			else {
+    				textAction.setText("Il faut sélectionner une carte");
+    			}
+    	});
     	
     	btnBuild.setOnAction(e -> {
     		if (selectedCard != null) {
