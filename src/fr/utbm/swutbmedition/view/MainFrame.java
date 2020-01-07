@@ -1,5 +1,7 @@
 package fr.utbm.swutbmedition.view;
 
+import java.io.FileNotFoundException;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -10,7 +12,7 @@ public class MainFrame {
 	private RulesFrame rulesFrames;
 	private Stage primaryStage;
 	
-	public MainFrame(Stage primaryStage) {
+	public MainFrame(Stage primaryStage) throws FileNotFoundException {
 		this.primaryStage = primaryStage;
 				
 		this.menuFrame = new MenuFrame(this);
@@ -18,27 +20,31 @@ public class MainFrame {
 		this.rulesFrames = new RulesFrame(this);
 		
 		Scene scene = new Scene(this.menuFrame);
-		this.primaryStage.setScene(scene);
+		this.getPrimaryStage().setScene(scene);
 		
-		this.primaryStage.setMinHeight(600);
-		this.primaryStage.setMinWidth(1000);
+		this.getPrimaryStage().setMinHeight(600);
+		this.getPrimaryStage().setMinWidth(1000);
 		
-		this.primaryStage.setMaximized(true);
-		this.primaryStage.setResizable(true);
+		this.getPrimaryStage().setMaximized(true);
+		this.getPrimaryStage().setResizable(true);
 	}
 	
 	public void showMenuFrame() {
 		this.menuFrame.showMenu();
-		this.primaryStage.getScene().setRoot(this.menuFrame);
+		this.getPrimaryStage().getScene().setRoot(this.menuFrame);
 	}
 	
 	public void showGameFrame() {
 		this.gameFrame.getGameController().initGame();
 		this.gameFrame.getGameController().start();
-		this.primaryStage.getScene().setRoot(this.gameFrame);
+		this.getPrimaryStage().getScene().setRoot(this.gameFrame);
 	}
 	
 	public void showRulesFrame() {
 		
+	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
 	}
 }

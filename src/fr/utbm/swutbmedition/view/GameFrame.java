@@ -53,7 +53,7 @@ public class GameFrame extends BorderPane {
     	HBox topLayout = new HBox();
     	mainLayout.getChildren().add(topLayout);
     	
-    	// A gauche on met le boad du player
+    	// A gauche on met le board du player
     	this.playerBoardLayout = new GridPane();
     	this.playerBoardLayout.setBackground(new Background(new BackgroundFill(Color.YELLOW, CornerRadii.EMPTY, Insets.EMPTY)));
     	topLayout.getChildren().add(this.playerBoardLayout);
@@ -67,8 +67,7 @@ public class GameFrame extends BorderPane {
     	HBox.setHgrow(this.playerBoardLayout, Priority.ALWAYS);
     	HBox.setHgrow(handAndActionLayout, Priority.ALWAYS);
     	
-    	this.playerHand = new HBox();
-    	this.playerHand.setSpacing(1);
+    	this.playerHand = new HBox(5);
     	this.playerHand.setAlignment(Pos.CENTER);
     	
     	this.playerHand.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, CornerRadii.EMPTY, Insets.EMPTY)));
