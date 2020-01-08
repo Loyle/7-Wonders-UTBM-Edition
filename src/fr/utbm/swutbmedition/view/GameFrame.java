@@ -303,4 +303,15 @@ public class GameFrame extends BorderPane {
 			});
 		}
 	}
+	
+	public void finish() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Fin de partie");
+		String score = new String("");
+		for(p : this.game.getPlayers()) {
+			score += p.name + " : " + p.score + "\n";
+		}
+		alert.setContentText(score);
+		alert.showAndWait();
+	}
 }

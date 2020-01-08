@@ -265,7 +265,7 @@ public class GameController {
 		this.game.setStart(false);
 		
 		this.gameFrame.refreshScoreboard();
-		
+		this.gameFrame.finish();
 		System.out.println("Partie terminée");
     }
 	

@@ -4,11 +4,11 @@ ID_Card;Type;Nom;couleur;costMoney;nbplayermin;Age ;effect;food;drink;pen;sheet;
 3;CardProduct;Cannette 33cL;c79a7b;0;53;TC;drink;-;-;-;-;-;-;-;-;-
 4;CardProduct;Sandwich;c79a7b;0;43;TC;food;-;-;-;-;-;-;-;-;-
 5;CardProduct;Molotov;c79a7b;1;6;TC;sheet,drink;-;-;-;-;-;-;-;-;-
-6;CardProduct;PenDrink;c79a7b;1;4;TC;pen,drink;-;-;-;-;-;-;-;-;-
+6;CardProduct;Starboucks;c79a7b;1;4;TC;pen,drink;-;-;-;-;-;-;-;-;-
 7;CardProduct;Fast Food;c79a7b;1;3;TC;drink,food;-;-;-;-;-;-;-;-;-
 8;CardProduct;Papeterie;c79a7b;1;3;TC;pen,sheet;-;-;-;-;-;-;-;-;-
 9;CardProduct;Bk;c79a7b;1;5;TC;sheet,food;-;-;-;-;-;-;-;-;-
-10;CardProduct;FoodPorn;c79a7b;1;2;TC;food,pen;-;-;-;-;-;-;-;-;-
+10;CardProduct;Domac;c79a7b;1;2;TC;food,pen;-;-;-;-;-;-;-;-;-
 11;CardProduct;Doubles Feuilles;c79a7b;1;43;SOC;sheet,sheet;-;-;-;-;-;-;-;-;-
 12;CardProduct;4 couleurs;c79a7b;1;43;SOC;pen,pen;-;-;-;-;-;-;-;-;-
 13;CardProduct;Bouteille;c79a7b;1;43;SOC;drink,drink;-;-;-;-;-;-;-;-;-
