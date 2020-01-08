@@ -241,74 +241,8 @@ public class GameController {
 		
 		System.out.println("Partie terminée");
     }
-
-	public void useCard(Player player, Card card) {
-		if(!this.game.isStart())
-			return;
-		
-		// Regarder si il a les ressources etc...
-		
-		// On check déjà si c'est gratos
-		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
-			player.useCard(card);
-			this.checkDoubleProductCard(card);
-			this.next();
-		}
-		// Ensuite cout en piece
-		else if(card.getCostMoney() != 0 && card.getCostProduct().size() == 0) {
-			if(player.getMoney() >= card.getCostMoney()) {
-				player.setMoney(player.getMoney() - card.getCostMoney());
-				player.useCard(card);
-				this.checkDoubleProductCard(card);
-				this.next();
-			}
-			else {				
-				System.out.println("Il vous manque des tunasses");
-			}
-		}
-		// Enfin les cout en ressources
-		else {
-			ArrayList<Product> usedProducts = new ArrayList<Product>();
-			ArrayList<Product> playerProducts = player.getAllProducts();
-			ArrayList<Product> notFind = new ArrayList<Product>();
-			
-			if(playerProducts.size() > 0) {
-				for(Product neededProd : card.getCostProduct()) {
-					int i = 0;
-					while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
-						i++;
-					}
-					if(i < playerProducts.size()) {
-						// We found a product !
-						usedProducts.add(neededProd);
-					}
-					else {
-						notFind.add(neededProd);
-					}
-				}
-				
-				if(card.getCostProduct().size() == usedProducts.size()) {
-					// We have all the product to use this card
-					player.useCard(card);
-					this.checkDoubleProductCard(card);
-					this.next();
-				}
-				else {
-					System.out.println("Il vous manque des ressources !");
-					for(Product p : notFind) {
-						System.out.println("Besoin " + p.getClass().getName());
-					}
-					for(Product p : player.getAllProducts()) {						
-						System.out.println("Mes prods " + p.getClass().getName());
-					}
-					
-				}
-			}
-		}
-	}
 	
 	private void checkDoubleProductCard(Card card) {
-
 		if(card instanceof ProductCard) {
 			ProductCard pCard = (ProductCard) card;
 			
@@ -318,6 +252,81 @@ public class GameController {
 					pCard.getProducts().remove(nb);
 				}
 			}
+		}
+	}
+	
+	public boolean useCard(Player player, Card card) {
+		if(!this.game.isStart())
+			return false;
+		
+		if(this.canUseCard(player, card)) {
+			player.setMoney(player.getMoney() - card.getCostMoney());
+			player.useCard(card);
+			this.checkDoubleProductCard(card);
+			this.next();
+			
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean canUseCard(Player player,Card card) {
+		// Regarder si il a les ressources etc...
+		// On check déjà si c'est gratos
+		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
+			return true;
+		}
+		// Ensuite cout en piece
+		else if(card.getCostMoney() != 0 && card.getCostProduct().size() == 0) {
+			if(player.getMoney() >= card.getCostMoney()) {
+				return true;
+			}
+			else {				
+				System.out.println("Il vous manque des tunasses");
+			}
+		}
+		// Enfin les cout en ressources
+		else {
+			if(this.haveProductsToUse(player, card)) {
+				return true;
+			}
+		}
+				
+		return false;
+	}
+	
+	public boolean haveProductsToUse(Player player, Card card) {
+		ArrayList<Product> usedProducts = new ArrayList<Product>();
+		ArrayList<Product> playerProducts = player.getAllProducts();
+		ArrayList<Product> notFind = new ArrayList<Product>();
+		
+		for(Product neededProd : card.getCostProduct()) {
+			int i = 0;
+			while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
+				i++;
+			}
+			if(i < playerProducts.size()) {
+				// We found a product !
+				usedProducts.add(neededProd);
+			}
+			else {
+				notFind.add(neededProd);
+			}
+		}
+			
+		if(card.getCostProduct().size() == usedProducts.size()) {
+			// We have all the product to use this card				
+			return true;
+		}
+		else {
+			System.out.println("Il vous manque des ressources !");
+			for(Product p : notFind) {
+				System.out.println("Besoin " + p.getClass().getName());
+			}
+			for(Product p : player.getAllProducts()) {						
+				System.out.println("Mes prods " + p.getClass().getName());
+			}
+			return false;
 		}
 	}
 
