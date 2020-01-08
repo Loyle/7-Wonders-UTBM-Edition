@@ -7,17 +7,13 @@ import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.view.component.CardComponent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -26,7 +22,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -145,6 +140,22 @@ public class GameFrame extends BorderPane {
     	btnSell.setOnAction(e -> {
     		if (selectedCard != null) {
     			gameController.sellCard(game.getCurrentPlayer(), selectedCard);
+    			selectedCard = null;
+    		}
+    		else {
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setTitle("Information");
+    			alert.setHeaderText("Veuillez sélectionner une carte");
+    			alert.showAndWait();
+    		}
+    	});
+    	
+    	btnBuildWonder.setOnAction(e -> {
+    		if (selectedCard != null) {
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setTitle("Information");
+    			alert.setHeaderText(gameController.buildWonder(game.getCurrentPlayer(), selectedCard));
+    			alert.showAndWait();
     			selectedCard = null;
     		}
     		else {
