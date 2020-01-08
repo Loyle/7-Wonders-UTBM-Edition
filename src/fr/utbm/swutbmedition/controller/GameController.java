@@ -1,6 +1,7 @@
 package fr.utbm.swutbmedition.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
@@ -13,6 +14,7 @@ import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.model.card.Civil;
 import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
+import fr.utbm.swutbmedition.model.loader.CardLoader;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
@@ -37,6 +39,7 @@ public class GameController {
     	this.game.setPlayers(players);
     	
     	// C'est ici qu'on va affecter les board / cartes aux joueurs
+    
     	// Sachant qu'il faut permettre de pouvoir choisir la face de board sur laquel il souhaite commencer
     	
     	// Je fais les essaies ici du coup
@@ -44,8 +47,11 @@ public class GameController {
         	//System.out.println(card.getName());
         }
     	
+    	
+    	this.game.setExistingCards(CardLoader.loadCard(this.game.getPlayers().size()));
     	// On donne les cartes de depart Ã  l'ensemble des joueurs
     	this.distributeCards();
+    	this.giveBoard();
     	
     	for(Player p : this.game.getPlayers()) {
     		for(Card c : p.getHandCards()) {
@@ -150,6 +156,17 @@ public class GameController {
 			}
 		}
     }
+	
+	public void giveBoard() {
+		for(Player player : this.game.getPlayers()) {
+			Random r = new Random();
+			int i = r.nextInt(this.game.getExistingBoards().size());
+			int j = (Math.random() < 0.5) ? 0 : 1;
+			player.setBoard(this.game.getExistingBoards().get(i).get(0));
+		}
+		
+		
+	}
 	
 	private void switchPlayersCards() {
 		if(this.game.getRotation() == 0) { // vers la droite
@@ -322,6 +339,17 @@ public class GameController {
 			}
 		}
 			
+		if(!notFind.isEmpty()) {
+			ArrayList<ArrayList<Product>> otherPlayerProducts = checkOtherProduct(this.game, player, notFind);
+			for(ArrayList<Product> ap : otherPlayerProducts) {
+				for(Product p : ap) {
+					usedProducts.add(p);
+				}
+			}			
+		}
+		
+
+		
 		if(card.getCostProduct().size() == usedProducts.size()) {
 			// We have all the product to use this card				
 			return true;
@@ -392,4 +420,58 @@ public class GameController {
 		next();
 		return "";
 	}
+
+	
+	public ArrayList<ArrayList<Product>> checkOtherProduct(Game g, Player p,ArrayList<Product>notFind) {
+		
+		ArrayList<Product> otherProductRight= new ArrayList<Product>();
+		ArrayList<Product> otherProductLeft= new ArrayList<Product>();
+		ArrayList<ArrayList<Product>> otherProductToGive = new ArrayList<ArrayList<Product>>();
+		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+		int pos = g.getPlayers().indexOf(p);
+		int toCheck = pos + 1;
+		
+		if(pos == g.getPlayers().size() - 1)
+			toCheck = 0;
+		
+		for(Product neededProd : notFind) {
+			int i = 0;
+			while(i < this.game.getPlayers().get(toCheck).getAllProducts().size() && this.game.getPlayers().get(toCheck).getAllProducts().get(i).getClass().equals(neededProd.getClass()) == false) {
+				i++;
+			}
+			if(i < this.game.getPlayers().get(toCheck).getAllProducts().size()) {
+				// We found a product !
+					otherProductLeft.add(neededProd);
+			}
+		}
+		otherProductToGive.add(otherProductRight);
+		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
+				toCheck = pos - 1;
+				
+				if(pos == 0)
+					toCheck = g.getPlayers().size() - 1;
+				for(Product neededProd : notFind) {
+					if(!otherProductRight.contains(neededProd)) {
+						int i = 0;
+						
+						while(i < this.game.getPlayers().get(toCheck).getAllProducts().size() && this.game.getPlayers().get(toCheck).getAllProducts().get(i).getClass().equals(neededProd.getClass()) == false) {
+							i++;
+						}
+						if(i < this.game.getPlayers().get(toCheck).getAllProducts().size()) {
+							// We found a product !
+							otherProductLeft.add(neededProd);
+						}
+					}
+					
+				}
+				otherProductToGive.add(otherProductLeft);
+				if(notFind.size() == otherProductRight.size()) {
+					// We have all the product to use this card				
+					return otherProductToGive;
+				}else {
+					return null;
+				}	
+		
+	}
 }
+

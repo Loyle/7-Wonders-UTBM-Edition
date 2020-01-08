@@ -28,7 +28,7 @@ public class Player {
         this.score = 0;
         this.usedCards = new ArrayList<Card>();
         this.handCards = new ArrayList<Card>();
-        this.board = new Board();
+        this.board = null;
         this.money = 3;
         this.creditsECTS = 0;
         this.conflicts = new ArrayList<Integer>();
@@ -38,7 +38,7 @@ public class Player {
         this.score = 0;
         this.usedCards = new ArrayList<Card>();
         this.handCards = new ArrayList<Card>();
-        this.board = new Board();
+        this.board = null;
         this.money = 3;
         this.creditsECTS = 0;
         this.conflicts = new ArrayList<Integer>();
@@ -122,7 +122,7 @@ public class Player {
     	ArrayList<Product> products = new ArrayList<Product>();
     	
     	// On récupère le product du board
-    	//products.add(this.board.getProduct());
+    	products.add(this.board.getProduct());
     	
     	// FAUT RECUPERER AUSSI LES PRODUCT DES ETAPES DE BOARD
     	
@@ -189,5 +189,9 @@ public class Player {
 	public Board getBoard() {
 		// TODO Auto-generated method stub
 		return this.board;
+	}
+	
+	public void setBoard(Board b) {
+		this.board=b;
 	}
 }
