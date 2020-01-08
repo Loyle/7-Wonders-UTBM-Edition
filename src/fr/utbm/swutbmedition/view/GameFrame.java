@@ -76,7 +76,6 @@ public class GameFrame extends BorderPane {
     	
     	// A gauche on met le board du player
     	this.playerBoardLayout = new BorderPane();
-    	this.playerBoardLayout.setPadding(new Insets(5));
     	this.playerBoardLayout.setStyle("-fx-border-style: solid outside;" + 
                 "-fx-border-width: 1;" + 
                 "-fx-border-color: black;" + 
@@ -98,8 +97,8 @@ public class GameFrame extends BorderPane {
     	HBox.setHgrow(handAndActionLayout, Priority.ALWAYS);
     	
     	this.playerHand = new FlowPane(Orientation.HORIZONTAL,4,2);
-    	this.playerHand.setAlignment(Pos.CENTER);
-    	this.playerHand.setPadding(new Insets(20));
+    	this.playerHand.setAlignment(Pos.TOP_CENTER);
+    	this.playerHand.setPadding(new Insets(10));
     	
     	
     	handAndActionLayout.getChildren().add(this.playerHand);
@@ -159,13 +158,13 @@ public class GameFrame extends BorderPane {
     	
     	this.actionsLayout = new HBox();
     	this.actionsLayout.getChildren().addAll(this.buildBtn,btnSell,btnBuildWonder);
-    	this.actionsLayout.setAlignment(Pos.CENTER);
-    	this.actionsLayout.setSpacing(20);
+    	this.actionsLayout.setAlignment(Pos.BOTTOM_CENTER);
+    	this.actionsLayout.setSpacing(10);
     	HBox.setHgrow(this.buildBtn, Priority.ALWAYS);
     	HBox.setHgrow(btnSell, Priority.ALWAYS);
     	HBox.setHgrow(btnBuildWonder, Priority.ALWAYS);
     	
-    	VBox blockAction = new VBox(20);
+    	VBox blockAction = new VBox(10);
     	blockAction.getChildren().addAll(actionsLayout,textAction);
     	
     	handAndActionLayout.getChildren().add(blockAction);
@@ -233,7 +232,7 @@ public class GameFrame extends BorderPane {
     }
     public void refreshGameStatus() {
     	this.gameStatus.getChildren().clear();
-    	Text text = new Text("C'est à " + this.game.getCurrentPlayer().getName() + " de jouer | Tour n°" + (int) (this.game.getRound() + 1) + " | Age n°" + this.game.getAge());
+    	Text text = new Text("C'est à "+ this.game.getCurrentPlayer().getName() +" de jouer           Tour n°" + (int) (this.game.getRound() + 1) + "            Age n°" + this.game.getAge());
     	text.setFont(Font.font("Arial",FontWeight.BOLD,FontPosture.REGULAR,30));
     	this.gameStatus.getChildren().add(text);
     }
@@ -284,7 +283,13 @@ public class GameFrame extends BorderPane {
 	public void refreshAllBoards() {
 		this.otherBoardsLayout.getChildren().clear();
 		for(Player player : this.game.getPlayers()) {
-			this.otherBoardsLayout.getChildren().add(new BoardComponent(player, false));
+			BoardComponent board = new BoardComponent(player, false);
+			this.otherBoardsLayout.getChildren().add(board);
+			
+			board.setCursor(Cursor.HAND);
+			board.setOnMouseClicked(e -> {
+				this.displayPlayerBoard(player);
+			});
 		}
 	}
 }
