@@ -1,6 +1,7 @@
 package fr.utbm.swutbmedition.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
@@ -332,6 +333,17 @@ public class GameController {
 			}
 		}
 			
+		if(!notFind.isEmpty()) {
+			ArrayList<ArrayList<Product>> otherPlayerProducts = checkOtherProduct(this.game, player, notFind);
+			for(ArrayList<Product> ap : otherPlayerProducts) {
+				for(Product p : ap) {
+					usedProducts.add(p);
+				}
+			}			
+		}
+		
+
+		
 		if(card.getCostProduct().size() == usedProducts.size()) {
 			// We have all the product to use this card				
 			return true;
@@ -401,5 +413,57 @@ public class GameController {
 		}
 		next();
 		return "";
+	}
+	
+	public ArrayList<ArrayList<Product>> checkOtherProduct(Game g, Player p,ArrayList<Product>notFind) {
+		
+		ArrayList<Product> otherProductRight= new ArrayList<Product>();
+		ArrayList<Product> otherProductLeft= new ArrayList<Product>();
+		ArrayList<ArrayList<Product>> otherProductToGive = new ArrayList<ArrayList<Product>>();
+		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+		int pos = g.getPlayers().indexOf(p);
+		int toCheck = pos + 1;
+		
+		if(pos == g.getPlayers().size() - 1)
+			toCheck = 0;
+		
+		for(Product neededProd : notFind) {
+			int i = 0;
+			while(i < this.game.getPlayers().get(toCheck).getAllProducts().size() && this.game.getPlayers().get(toCheck).getAllProducts().get(i).getClass().equals(neededProd.getClass()) == false) {
+				i++;
+			}
+			if(i < this.game.getPlayers().get(toCheck).getAllProducts().size()) {
+				// We found a product !
+					otherProductLeft.add(neededProd);
+			}
+		}
+		otherProductToGive.add(otherProductRight);
+		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
+				toCheck = pos - 1;
+				
+				if(pos == 0)
+					toCheck = g.getPlayers().size() - 1;
+				for(Product neededProd : notFind) {
+					if(!otherProductRight.contains(neededProd)) {
+						int i = 0;
+						
+						while(i < this.game.getPlayers().get(toCheck).getAllProducts().size() && this.game.getPlayers().get(toCheck).getAllProducts().get(i).getClass().equals(neededProd.getClass()) == false) {
+							i++;
+						}
+						if(i < this.game.getPlayers().get(toCheck).getAllProducts().size()) {
+							// We found a product !
+							otherProductLeft.add(neededProd);
+						}
+					}
+					
+				}
+				otherProductToGive.add(otherProductLeft);
+				if(notFind.size() == otherProductRight.size()) {
+					// We have all the product to use this card				
+					return otherProductToGive;
+				}else {
+					return null;
+				}	
+		
 	}
 }
