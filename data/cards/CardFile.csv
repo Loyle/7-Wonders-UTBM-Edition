@@ -44,17 +44,17 @@ ID_Card;Type;Nom;couleur;costMoney;nbplayermin;Age ;effect;food;drink;pen;sheet;
 43;Commercial;Camion pizza;yellow;0;74;SOC;-;-;-;-;-;-;-;-;-;-
 44;Commercial;RU Montbeliard;yellow;0;64;BR;-;-;2;-;-;-;1;-;-;-
 45;Commercial;Services Finances;yellow;0;753;BR;-;2;-;1;-;-;-;-;-;58
-46;Military;Accueil Belfort;red;0;73;TC;-;-;-;-;1;-;-;-;-;-
-47;Military;Accueil Sevenans;red;0;53;TC;-;-;-;1;-;-;-;-;-;-
-48;Military;Accueil Montbéliard;red;0;43;TC;-;-;1;-;-;-;-;-;-;-
-49;Military;Pont;red;0;73;SOC;-;3;-;-;-;-;-;-;50;-
-50;Military;P108;red;0;73;BR;-;1;-;3;-;-;-;-;-;49
-51;Military;Tour penchée;red;0;764;SOC;-;-;-;2;1;-;-;-;52;-
-52;Military;T306;red;0;654;BR;-;3;-;1;-;-;-;-;-;51
-53;Military;Château;red;0;743;BR;-;-;-;1;2;-;-;1;-;-
-54;Military;Salle du conseil;red;0;53;SOC;-;-;1;1;1;-;-;-;-;57
-55;Military;DRODI;red;0;63;SOC;-;-;-;1;2;-;-;-;-;60
-56;Military;Infirmerie;red;0;53;BR;-;-;3;-;1;-;-;-;-;61
+46;Military;Accueil Belfort;red;0;73;TC;1;-;-;-;1;-;-;-;-;-
+47;Military;Accueil Sevenans;red;0;53;TC;1;-;-;1;-;-;-;-;-;-
+48;Military;Accueil Montbéliard;red;0;43;TC;1;-;1;-;-;-;-;-;-;-
+49;Military;Pont;red;0;73;SOC;2;3;-;-;-;-;-;-;50;-
+50;Military;P108;red;0;73;BR;3;1;-;3;-;-;-;-;-;49
+51;Military;Tour penchée;red;0;764;SOC;2;-;-;2;1;-;-;-;52;-
+52;Military;T306;red;0;654;BR;3;3;-;1;-;-;-;-;-;51
+53;Military;Château;red;0;743;BR;3;-;-;1;2;-;-;1;-;-
+54;Military;Salle du conseil;red;0;53;SOC;2;-;1;1;1;-;-;-;-;57
+55;Military;DRODI;red;0;63;SOC;2;-;-;1;2;-;-;-;-;60
+56;Military;Infirmerie;red;0;53;BR;3;-;3;-;1;-;-;-;-;61
 57;Scientific;BU Sevenans;green;0;53;TC;CS;-;-;-;-;-;-;1;54,58;-
 58;Scientific;4ème étage;green;0;43;SOC;CS;-;-;2;1;-;-;-;45,59;57
 59;Scientific;P457;green;0;63;BR;CS;-;2;-;-;-;1;1;?;58
