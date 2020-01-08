@@ -25,7 +25,7 @@ public class BoardLoader {
 	@SuppressWarnings("unlikely-arg-type")
 	public static ArrayList<ArrayList<Board>> loadBoard(){
 		ArrayList<ArrayList<Board>> boards = new ArrayList<ArrayList<Board>>();
-		
+		int k=0;
 		String csvFile = "./data/board/BoardFile.csv";
         BufferedReader br = null;
         String line = "";
@@ -41,7 +41,7 @@ public class BoardLoader {
                 
                 // use comma as separator
                  split = line.split(cvsSplitBy);   
-                 ArrayList<Board> array = new ArrayList<Board>();
+                 
                  Product product;
                  switch (split[3]) {
                  case "drink":
@@ -193,12 +193,16 @@ public class BoardLoader {
                  steps.add(step2);
                  steps.add(step3);
                  steps.add(step4);
-                                  
+                 ArrayList<Board> array = new ArrayList<Board>();         
                  array.add(new Board(split[1],split[2],product,steps));
-                 boards.add(array);
+                 
+                 if(k%2==1) {
+                	 boards.add(array);
+                	 
+                 }
+                 ++k;
 			}
-	
-			
+		
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
