@@ -3,13 +3,18 @@ package fr.utbm.swutbmedition.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
+
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.card.Civil;
 import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
+import fr.utbm.swutbmedition.model.loader.CardLoader;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
@@ -43,7 +48,9 @@ public class GameController {
     	this.game.addPlayer(new Player("Theo"));
     	this.game.addPlayer(new Player("Antoine"));
     	
-    	// On donne les cartes de depart à l'ensemble des joueurs
+    	
+    	this.game.setExistingCards(CardLoader.loadCard(this.game.getPlayers().size()));
+    	// On donne les cartes de depart Ã  l'ensemble des joueurs
     	this.distributeCards();
     	
     	for(Player p : this.game.getPlayers()) {
@@ -117,7 +124,7 @@ public class GameController {
 		if(this.checkEnd())
 			this.finish();
 		
-		// On récupère le joueurs suivant
+		// On rÃ©cupÃ¨re le joueurs suivant
 		this.game.setCurrentPlayer(this.game.getPlayers().get(this.playerID));
 		
 		// Refresh status game
@@ -131,35 +138,23 @@ public class GameController {
 
 	public void distributeCards() {
     	// Distribue les cartes aux joueurs en fct de l'age
-		ArrayList<Card> toRemove = new ArrayList<Card>();
-		int nbToChoose = 9-(this.game.getPlayers().size()+2);
-		for(Card c: this.game.getExistingCards()) {
-			if(c instanceof Guild) {
-				for(int j=0;j<nbToChoose;++j) {
-					Random R = new Random();
-					int k = R.nextInt(9);
-					toRemove.add(this.game.getExistingCards().get(k));
+
+		for(Player player : this.game.getPlayers()) {
+			ArrayList<Integer> blackList = new ArrayList<Integer>();
+			for(int i = 0; i < 7; i++) {
+				if(this.game.getExistingCards().get(i).getAge() == this.game.getAge()) {	
+					int id;
+					do {
+						Random r = new Random();
+						id = r.nextInt(this.game.getExistingCards().size() + 1);
+					}
+					while(blackList.contains(id) == true);
+					
+					blackList.add(id);
+					player.addCard(this.game.getExistingCards().get(i));
 				}
 			}
 		}
-
-		this.game.getExistingCards().removeAll(toRemove);
-    	for(Player p : this.game.getPlayers()) {
-    		// On clear la main actuelle
-    		p.getHandCards().clear();
-    		
-    		for(int j = 0; j < 7; j++) {
-	    		// On distribu 7 cartes pour chaque joueurs (en fonction de l'Age)
-	    		int i;
-	    		do {
-	    			Random r = new Random();
-	    			i = r.nextInt(this.game.getExistingCards().size());
-				} while (this.game.getExistingCards().get(i).getAge() != this.game.getAge());
-	    		
-	    		
-	    		p.addCard(this.game.getExistingCards().get(i).copy());
-    		}
-    	}
     }
 	
 	private void switchPlayersCards() {
@@ -193,15 +188,15 @@ public class GameController {
     private void doConflicts() {
  		// Victoire : 1 / 3 / 5 pts de victoire fct de l'age
     	// Defaire : -1
-    	// Egalité : 0
-    	// Check a droite et à gauche
+    	// EgalitÃ© : 0
+    	// Check a droite et Ã  gauche
     	
     	for(Player p : this.game.getPlayers()) {
     		int pos = this.game.getPlayers().indexOf(p);
  
     		
     		
-    		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+    		// Premier temps Ã  droite (donc + 1 par rapport Ã  numero du joueur)
     		int toCheck = pos + 1;
     		
     		if(pos == this.game.getPlayers().size() - 1)
@@ -222,7 +217,7 @@ public class GameController {
     			p.addConflicts(0);
     		
     		
-    		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
+    		// DeuxiÃ¨me temps Ã  gauche (donc + 1 par rapport Ã  numero du joueur)
     		toCheck = pos - 1;
     		
     		if(pos == 0)
@@ -246,7 +241,7 @@ public class GameController {
  	}
 
     private boolean checkEnd() {
-    	// Ici faut vérifier si c'est la fin de partie
+    	// Ici faut vÃ©rifier si c'est la fin de partie
     	if(this.game.getRound() == 0 && this.game.getAge() == 4) {
     		return true;    		
     	}
@@ -258,7 +253,7 @@ public class GameController {
 		
 		this.gameFrame.refreshScoreboard();
 		
-		System.out.println("Partie terminée");
+		System.out.println("Partie terminÃ©e");
     }
 	
 	private void checkDoubleProductCard(Card card) {
@@ -291,7 +286,7 @@ public class GameController {
 	
 	public boolean canUseCard(Player player,Card card) {
 		// Regarder si il a les ressources etc...
-		// On check déjà si c'est gratos
+		// On check dÃ©jÃ  si c'est gratos
 		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
 			return true;
 		}
@@ -370,9 +365,9 @@ public class GameController {
 	
 	public String buildWonder(Player player, Card card) {
 		if(!this.game.isStart())
-			return "la partie n'est pas lancée";
+			return "la partie n'est pas lancÃ©e";
 		/*if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
-			return "La merveille a déjà été construite";*/
+			return "La merveille a dÃ©jÃ  Ã©tÃ© construite";*/
 		
 		ArrayList<Product> usedProducts = new ArrayList<Product>();
 		ArrayList<Product> playerProducts = player.getAllProducts();
@@ -414,6 +409,7 @@ public class GameController {
 		next();
 		return "";
 	}
+
 	
 	public ArrayList<ArrayList<Product>> checkOtherProduct(Game g, Player p,ArrayList<Product>notFind) {
 		
@@ -467,3 +463,4 @@ public class GameController {
 		
 	}
 }
+

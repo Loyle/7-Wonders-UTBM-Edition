@@ -27,7 +27,7 @@ public class Game {
         this.round = 0;
         this.age = 1;
         this.isStart = false;
-        this.existingCards = CardLoader.loadCard();
+        this.existingCards = new ArrayList<Card>();
         this.setExistingBoards(BoardLoader.loadBoard());
         this.rotation = 0;
     }
@@ -70,6 +70,10 @@ public class Game {
     public ArrayList<Card> getExistingCards() {
     	return this.existingCards;
     }
+    
+    public void removeExistingCard(int i) {
+    	this.existingCards.remove(i);
+    }
 
 	/**
 	 * @return the rotation
@@ -91,5 +95,9 @@ public class Game {
 
 	public void setExistingBoards(ArrayList<ArrayList<Board>> existingBoards) {
 		this.existingBoards = existingBoards;
+	}
+
+	public void setExistingCards(ArrayList<Card> existingCards) {
+		this.existingCards = existingCards;
 	}
 }

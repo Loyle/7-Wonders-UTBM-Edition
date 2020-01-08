@@ -25,125 +25,136 @@ import fr.utbm.swutbmedition.model.product.Sheet;
 import javafx.scene.paint.Color;
 
 public class CardLoader {
-	
-    public static ArrayList<Card> loadCard() {
-        ArrayList<Card> cards = new ArrayList<Card>();
-        
-        String csvFile = "./data/cards/CardFile.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ";";
-        
-        try {
+
+	public static ArrayList<Card> loadCard(int nbPlayer) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String csvFile = "./data/cards/CardFile.csv";
+		BufferedReader br = null;
+		String line = "";
+		String cvsSplitBy = ";";
+
+		try {
 			br = new BufferedReader(new FileReader(csvFile));
 			br.readLine(); // On lit la première ligne qui est la ligne d'entête
 			while ((line = br.readLine()) != null) {
-                
-                // use comma as separator
-                String[] split = line.split(cvsSplitBy);
-                                
-                
-                ArrayList<Product> products = new ArrayList<Product>();
-                for(int i = 8; i <= 14; i++) {
-                	// On ajout les product
-                	if(!split[i].equals("-")) {
-                		int nb = Integer.valueOf(split[i]);
-                		
-                		for(int j = 0; j < nb; j++) {
-	                		Product product;
-	                		switch (i) {
-							case 8:
-								product = new Food();
-								break;
-							case 9:
-								product = new Drink();
-								break;
-							case 10:
-								product = new Pen();
-								break;
-							case 11:
-								product = new Sheet();
-								break;
-							case 12:
-								product = new Computer();
-								break;
-							case 13:
-								product = new Book();
-								break;
-							case 14:
-								product = new Desk();
-								break;
-							default:
-								product = null;
-								break;
-							}
-	                		products.add(product);
-                		}
-                	}
-                }
-                
-                // Faire peut etre 3 ArrayList<Card> et les classer selon l'age d'apparition de la card 
-                String effect = split[7];
-                if(effect.equals("-"))
-                	effect = "0";
-                
-                // AGE
-                int age = 1; // TC
-                if(split[6].equals("SOC")) // SOC
-                	age = 2;
-                else if(split[6].equals("BR")) // BR
-                	age = 3;
-                
-                
-                switch (split[1]) {
-				case "CardProduct":
-					ArrayList<Product> prods = CardLoader.loadProducts(effect);
-					cards.add(new ProductCard(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), prods));
-					break;
-				case "Civil":
-					cards.add(new Civil(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
-					break;
-				case "Commercial":
-					cards.add(new Commercial(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
-					break;
-				case "Military":
-					cards.add(new Military(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));					
-					break;
-				case "Scientific":
-					cards.add(new Scientific(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
-					break;
-				case "Guild":
-					cards.add(new Guild(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]),split[7]));					
-					break;					
-				default:
-					break;
-				}
 
-            }	
-			
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        
-        return cards;
-    }
-    private static ArrayList<Product> loadProducts(String prods) {
-    	String[] split = prods.split(",");
-    	
-    	ArrayList<Product> products = new ArrayList<Product>();
-    	
-    	for(int i = 0; i < split.length; i++) {
-    		switch (split[i]) {
+				// use comma as separator
+				String[] split = line.split(cvsSplitBy);
+				
+				for (char ch : split[5].toCharArray()) {
+					if (Character.getNumericValue(ch) <= 3) {
+						ArrayList<Product> products = new ArrayList<Product>();
+						for (int i = 8; i <= 14; i++) {
+							// On ajout les product
+							if (!split[i].equals("-")) {
+								int nb = Integer.valueOf(split[i]);
+
+								for (int j = 0; j < nb; j++) {
+									Product product;
+									switch (i) {
+									case 8:
+										product = new Food();
+										break;
+									case 9:
+										product = new Drink();
+										break;
+									case 10:
+										product = new Pen();
+										break;
+									case 11:
+										product = new Sheet();
+										break;
+									case 12:
+										product = new Computer();
+										break;
+									case 13:
+										product = new Book();
+										break;
+									case 14:
+										product = new Desk();
+										break;
+									default:
+										product = null;
+										break;
+									}
+									products.add(product);
+								}
+							}
+						}
+
+						// Faire peut etre 3 ArrayList<Card> et les classer selon l'age d'apparition de
+						// la card
+						String effect = split[7];
+						if (effect.equals("-"))
+							effect = "0";
+
+						// AGE
+						int age = 1; // TC
+						if (split[6].equals("SOC")) // SOC
+							age = 2;
+						else if (split[6].equals("BR")) // BR
+							age = 3;
+
+						switch (split[1]) {
+						case "CardProduct":
+							ArrayList<Product> prods = CardLoader.loadProducts(effect);
+							cards.add(
+									new ProductCard(split[2], age, Color.web("#" + split[3]), Integer.valueOf(split[4]),
+											products, new ImageIcon(), Integer.valueOf(split[5]), prods));
+							break;
+						case "Civil":
+							cards.add(new Civil(split[2], age, Color.web("#" + split[3]), Integer.valueOf(split[4]),
+									products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
+							break;
+						case "Commercial":
+							cards.add(new Commercial(split[2], age, Color.web("#" + split[3]),
+									Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
+							break;
+						case "Military":
+							cards.add(new Military(split[2], age, Color.web("#" + split[3]), Integer.valueOf(split[4]),
+									products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
+							break;
+						case "Scientific":
+							cards.add(
+									new Scientific(split[2], age, Color.web("#" + split[3]), Integer.valueOf(split[4]),
+											products, new ImageIcon(), Integer.valueOf(split[5]), effect));
+							break;
+						case "Guild":
+							cards.add(new Guild(split[2], age, Color.web("#" + split[3]), Integer.valueOf(split[4]),
+									products, new ImageIcon(), Integer.valueOf(split[5]), split[7]));
+							break;
+						default:
+							break;
+						}
+					}
+				}
+			}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return cards;
+	}
+
+	private static ArrayList<Product> loadProducts(String prods) {
+		String[] split = prods.split(",");
+
+		ArrayList<Product> products = new ArrayList<Product>();
+
+		for (int i = 0; i < split.length; i++) {
+			switch (split[i]) {
 			case "food":
 				products.add(new Food());
 				break;
@@ -168,7 +179,7 @@ public class CardLoader {
 			default:
 				break;
 			}
-    	}
+		}
 		return products;
-    }
+	}
 }
