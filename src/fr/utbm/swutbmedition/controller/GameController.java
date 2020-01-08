@@ -365,7 +365,7 @@ public class GameController {
 		ArrayList<Product> usedProducts = new ArrayList<Product>();
 		ArrayList<Product> playerProducts = player.getAllProducts();
 		ArrayList<Product> notFind = new ArrayList<Product>();
-		ArrayList<Product> costProduct = player.getBoard().getSteps().get(player.getBoard().getLevel()+1).getCostProduct();	
+		ArrayList<Product> costProduct = player.getBoard().getSteps().get(player.getBoard().getLevel()).getCostProduct();	
 		if(playerProducts.size() > 0) {
 			
 			for(Product neededProd : costProduct) {
@@ -376,6 +376,7 @@ public class GameController {
 				if(i < playerProducts.size()) {
 					// We found a product !
 					usedProducts.add(neededProd);
+					playerProducts.remove(i);
 				}
 				else {
 					notFind.add(neededProd);
@@ -398,6 +399,7 @@ public class GameController {
 				return prodMiss;
 			}
 		}
+		next();
 		return "";
 	}
 }
