@@ -98,22 +98,22 @@ public class CardLoader {
                 switch (split[1]) {
 				case "CardProduct":
 					ArrayList<Product> prods = CardLoader.loadProducts(effect);
-					cards.add(new ProductCard(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), prods));
+					cards.add(new ProductCard(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), prods));
 					break;
 				case "Civil":
-					cards.add(new Civil(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
+					cards.add(new Civil(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));
 					break;
 				case "Commercial":
-					cards.add(new Commercial(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
+					cards.add(new Commercial(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5])));
 					break;
 				case "Military":
-					cards.add(new Military(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));					
+					cards.add(new Military(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), Integer.valueOf(effect)));					
 					break;
 				case "Scientific":
-					cards.add(new Scientific(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
+					cards.add(new Scientific(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]), effect));					
 					break;
 				case "Guild":
-					cards.add(new Guild(split[2], age, Color.web(split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]),split[7]));					
+					cards.add(new Guild(split[2], age, Color.web("#"+split[3]), Integer.valueOf(split[4]), products, new ImageIcon(), Integer.valueOf(split[5]),split[7]));					
 					break;					
 				default:
 					break;

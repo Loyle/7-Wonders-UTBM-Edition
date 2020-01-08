@@ -1,78 +1,78 @@
 ID_Card;Type;Nom;couleur;costMoney;nbplayermin;Age ;effect;food;drink;pen;sheet;computer;book;desk;Free;isFreeWith
-1;CardProduct;Feuilles simple;brown;0;43;TC;sheet;-;-;-;-;-;-;-;-;-
-2;CardProduct;Stylo noir;brown;0;53;TC;pen;-;-;-;-;-;-;-;-;-
-3;CardProduct;Cannette 33cL;brown;0;53;TC;drink;-;-;-;-;-;-;-;-;-
-4;CardProduct;Sandwich;brown;0;43;TC;food;-;-;-;-;-;-;-;-;-
-5;CardProduct;Molotov;brown;1;6;TC;sheet,drink;-;-;-;-;-;-;-;-;-
-6;CardProduct;PenDrink;brown;1;4;TC;pen,drink;-;-;-;-;-;-;-;-;-
-7;CardProduct;Fast Food;brown;1;3;TC;drink,food;-;-;-;-;-;-;-;-;-
-8;CardProduct;Papeterie;brown;1;3;TC;pen,sheet;-;-;-;-;-;-;-;-;-
-9;CardProduct;Bk;brown;1;5;TC;sheet,food;-;-;-;-;-;-;-;-;-
-10;CardProduct;FoodPorn;brown;1;2;TC;food,pen;-;-;-;-;-;-;-;-;-
-11;CardProduct;Doubles Feuilles;brown;1;43;SOC;sheet,sheet;-;-;-;-;-;-;-;-;-
-12;CardProduct;4 couleurs;brown;1;43;SOC;pen,pen;-;-;-;-;-;-;-;-;-
-13;CardProduct;Bouteille;brown;1;43;SOC;drink,drink;-;-;-;-;-;-;-;-;-
-14;CardProduct;Tacos 3 viandes;brown;1;43;SOC;food,food;-;-;-;-;-;-;-;-;-
-15;CardProduct;Bureau IKEA;grey;0;63;TC;desk;-;-;-;-;-;-;-;-;-
-16;CardProduct;Bureau IKEA;grey;0;53;SOC;desk;-;-;-;-;-;-;-;-;-
-17;CardProduct;Minitel;grey;0;63;TC;computer;-;-;-;-;-;-;-;-;-
-18;CardProduct;Alienware;grey;0;53;SOC;computer;-;-;-;-;-;-;-;-;-
-19;CardProduct;Emprunt BU;grey;0;63;TC;book;-;-;-;-;-;-;-;-;-
-20;CardProduct;Emprunt BU;grey;0;53;SOC;book;-;-;-;-;-;-;-;-;-
-21;Civil;Gymnase;blue;0;47;TC;3;-;-;-;-;-;-;-;-;-
-22;Civil;Gomette;blue;0;73;TC;3;1;-;-;-;-;-;-;23;-
-23;Civil;BU Montbéliard;blue;0;73;SOC;5;3;-;-;-;-;-;-;-;22
-24;Civil;Espace coworking;blue;0;53;TC;2;-;-;-;-;-;-;-;25;-
-25;Civil;FSDIE;blue;0;63;SOC;3;-;1;-;1;1;-;-;26;24
-26;Civil;MDE;blue;0;63;BR;7;-;2;1;-;1;1;1;-;25
-27;Civil;Pipi Statue;blue;0;63;TC;2;-;-;-;-;-;-;-;28;-
-28;Civil;Foyer;blue;0;73;SOC;4;-;-;2;1;-;-;-;29;27
-29;Civil;Maison des eleves;blue;0;43;BR;5;-;2;-;1;-;-;-;-;28
-30;Civil;Salbert;blue;0;653;BR;6;2;-;1;-;1;-;-;-;-
-31;Civil;Axone;blue;0;73;BR;8;1;1;1;1;1;1;1;-;-
-32;Civil;DR internationnal;blue;0;53;SOC;4;-;2;-;-;-;-;1;-;63
-33;Civil;UTSEUS;blue;0;53;BR;6;1;-;1;2;-;-;-;-;64
-34;Commercial;Optymo;yellow;0;753;TC;-;-;-;-;-;-;-;-;-;-
-35;Commercial;Distributeur Sevenans;yellow;0;73;TC;-;1;1;1;1;-;-;-;-;-
-36;Commercial;Machine à café Sevenans;yellow;0;73;TC;-;1;1;1;1;-;-;-;-;-
-37;Commercial;7'go;yellow;0;763;SOC;-;-;2;-;-;-;-;-;-;-
-38;Commercial;RU Sevenans;yellow;0;43;BR;-;-;-;1;1;-;-;1;-;-
-39;Commercial;Reprographie Sevenans;yellow;0;63;TC;-;-;-;-;-;1;1;1;-;-
-40;Commercial;Reprographie Belfort;yellow;0;653;SOC;-;-;-;-;2;-;-;-;-;-
-41;Commercial;RU Belfort;yellow;0;63;BR;-;1;-;-;-;1;-;-;-;-
-42;Commercial;Snack Belfort;yellow;0;63;SOC;-;-;-;-;-;-;-;-;-;-
-43;Commercial;Camion pizza;yellow;0;74;SOC;-;-;-;-;-;-;-;-;-;-
-44;Commercial;RU Montbeliard;yellow;0;64;BR;-;-;2;-;-;-;1;-;-;-
-45;Commercial;Services Finances;yellow;0;753;BR;-;2;-;1;-;-;-;-;-;58
-46;Military;Accueil Belfort;red;0;73;TC;1;-;-;-;1;-;-;-;-;-
-47;Military;Accueil Sevenans;red;0;53;TC;1;-;-;1;-;-;-;-;-;-
-48;Military;Accueil Montbéliard;red;0;43;TC;1;-;1;-;-;-;-;-;-;-
-49;Military;Pont;red;0;73;SOC;2;3;-;-;-;-;-;-;50;-
-50;Military;P108;red;0;73;BR;3;1;-;3;-;-;-;-;-;49
-51;Military;Tour penchée;red;0;764;SOC;2;-;-;2;1;-;-;-;52;-
-52;Military;T306;red;0;654;BR;3;3;-;1;-;-;-;-;-;51
-53;Military;Château;red;0;743;BR;3;-;-;1;2;-;-;1;-;-
-54;Military;Salle du conseil;red;0;53;SOC;2;-;1;1;1;-;-;-;-;57
-55;Military;DRODI;red;0;63;SOC;2;-;-;1;2;-;-;-;-;60
-56;Military;Infirmerie;red;0;53;BR;3;-;3;-;1;-;-;-;-;61
-57;Scientific;BU Sevenans;green;0;53;TC;CS;-;-;-;-;-;-;1;54,58;-
-58;Scientific;4ème étage;green;0;43;SOC;CS;-;-;2;1;-;-;-;45,59;57
-59;Scientific;P457;green;0;63;BR;CS;-;2;-;-;-;1;1;?;58
-60;Scientific;Bu Belfort;green;0;73;TC;TM;-;-;-;-;1;-;-;55,61;-
-61;Scientific;Crunch Lab;green;0;53;SOC;TM;-;2;-;-;-;1;-;56,62;60
-62;Scientific;Salle informatique;green;0;73;BR;TM;-;-;2;-;1;-;1;-;61
-63;Scientific;Salle TP MQ;green;0;43;TC;CG;-;-;-;-;-;1;-;32;-
-64;Scientific;GMC;green;0;63;SOC;CG;2;-;-;-;-;-;1;33,65;63
-65;Scientific;TITAN;green;0;43;BR;CG;-;-;-;2;1;1;-;-;64
-66;Scientific;BU Montbéliard;green;0;73;SOC;CG;-;-;-;1;-;1;-;67,68;-
-67;Scientific;EDIM;green;0;73;BR;CS;3;-;-;-;1;-;-;-;66
-68;Scientific;ELLIAD/ERCOS;green;0;533;BR;TM;-;-;-;1;1;1;-;-;66
-"""Merveill";Guild;AE;purple;0;0;BR;Civil;-;-;1;3;-;-;1;-;-
-70;Guild;BDS;purple;0;0;BR;RawMaterial;2;1;1;1;-;-;-;-;-
-71;Guild;BDF;purple;0;0;BR;Commercial;-;-;-;-;1;1;1;-;-
-72;Guild;CETU;purple;0;0;BR;Conflict;2;-;1;-;-;-;1;-;-
-73;Guild;Blousards;purple;0;0;BR;Scientific;-;3;-;-;-;1;1;-;-
-74;Guild;Anti-Blousards;purple;0;0;BR;Military;-;3;-;-;1;-;-;-;-
-75;Guild;Club Welcome;purple;0;0;BR;ManufacturedProduct;2;-;2;-;-;-;-;-;-
-76;Guild;FIMU;purple;0;0;BR;RawManGuild;-;-;-;-;3;1;1;-;-
-77;Guild;Integ’;purple;0;0;BR;Merveille;-;2;2;-;-;1;-;-;-
+1;CardProduct;Feuilles simple;c79a7b;0;43;TC;sheet;-;-;-;-;-;-;-;-;-
+2;CardProduct;Stylo noir;c79a7b;0;53;TC;pen;-;-;-;-;-;-;-;-;-
+3;CardProduct;Cannette 33cL;c79a7b;0;53;TC;drink;-;-;-;-;-;-;-;-;-
+4;CardProduct;Sandwich;c79a7b;0;43;TC;food;-;-;-;-;-;-;-;-;-
+5;CardProduct;Molotov;c79a7b;1;6;TC;sheet,drink;-;-;-;-;-;-;-;-;-
+6;CardProduct;PenDrink;c79a7b;1;4;TC;pen,drink;-;-;-;-;-;-;-;-;-
+7;CardProduct;Fast Food;c79a7b;1;3;TC;drink,food;-;-;-;-;-;-;-;-;-
+8;CardProduct;Papeterie;c79a7b;1;3;TC;pen,sheet;-;-;-;-;-;-;-;-;-
+9;CardProduct;Bk;c79a7b;1;5;TC;sheet,food;-;-;-;-;-;-;-;-;-
+10;CardProduct;FoodPorn;c79a7b;1;2;TC;food,pen;-;-;-;-;-;-;-;-;-
+11;CardProduct;Doubles Feuilles;c79a7b;1;43;SOC;sheet,sheet;-;-;-;-;-;-;-;-;-
+12;CardProduct;4 couleurs;c79a7b;1;43;SOC;pen,pen;-;-;-;-;-;-;-;-;-
+13;CardProduct;Bouteille;c79a7b;1;43;SOC;drink,drink;-;-;-;-;-;-;-;-;-
+14;CardProduct;Tacos 3 viandes;c79a7b;1;43;SOC;food,food;-;-;-;-;-;-;-;-;-
+15;CardProduct;Bureau IKEA;b7b7b7;0;63;TC;desk;-;-;-;-;-;-;-;-;-
+16;CardProduct;Bureau IKEA;b7b7b7;0;53;SOC;desk;-;-;-;-;-;-;-;-;-
+17;CardProduct;Minitel;b7b7b7;0;63;TC;computer;-;-;-;-;-;-;-;-;-
+18;CardProduct;Alienware;b7b7b7;0;53;SOC;computer;-;-;-;-;-;-;-;-;-
+19;CardProduct;Emprunt BU;b7b7b7;0;63;TC;book;-;-;-;-;-;-;-;-;-
+20;CardProduct;Emprunt BU;b7b7b7;0;53;SOC;book;-;-;-;-;-;-;-;-;-
+21;Civil;Gymnase;c8e3f6;0;47;TC;3;-;-;-;-;-;-;-;-;-
+22;Civil;Gomette;c8e3f6;0;73;TC;3;1;-;-;-;-;-;-;23;-
+23;Civil;BU Montbéliard;c8e3f6;0;73;SOC;5;3;-;-;-;-;-;-;-;22
+24;Civil;Espace coworking;c8e3f6;0;53;TC;2;-;-;-;-;-;-;-;25;-
+25;Civil;FSDIE;c8e3f6;0;63;SOC;3;-;1;-;1;1;-;-;26;24
+26;Civil;MDE;c8e3f6;0;63;BR;7;-;2;1;-;1;1;1;-;25
+27;Civil;Pipi Statue;c8e3f6;0;63;TC;2;-;-;-;-;-;-;-;28;-
+28;Civil;Foyer;c8e3f6;0;73;SOC;4;-;-;2;1;-;-;-;29;27
+29;Civil;Maison des eleves;c8e3f6;0;43;BR;5;-;2;-;1;-;-;-;-;28
+30;Civil;Salbert;c8e3f6;0;653;BR;6;2;-;1;-;1;-;-;-;-
+31;Civil;Axone;c8e3f6;0;73;BR;8;1;1;1;1;1;1;1;-;-
+32;Civil;DR internationnal;c8e3f6;0;53;SOC;4;-;2;-;-;-;-;1;-;63
+33;Civil;UTSEUS;c8e3f6;0;53;BR;6;1;-;1;2;-;-;-;-;64
+34;Commercial;Optymo;f3f3cb;0;753;TC;-;-;-;-;-;-;-;-;-;-
+35;Commercial;Distributeur Sevenans;f3f3cb;0;73;TC;-;1;1;1;1;-;-;-;-;-
+36;Commercial;Machine à café Sevenans;f3f3cb;0;73;TC;-;1;1;1;1;-;-;-;-;-
+37;Commercial;7'go;f3f3cb;0;763;SOC;-;-;2;-;-;-;-;-;-;-
+38;Commercial;RU Sevenans;f3f3cb;0;43;BR;-;-;-;1;1;-;-;1;-;-
+39;Commercial;Reprographie Sevenans;f3f3cb;0;63;TC;-;-;-;-;-;1;1;1;-;-
+40;Commercial;Reprographie Belfort;f3f3cb;0;653;SOC;-;-;-;-;2;-;-;-;-;-
+41;Commercial;RU Belfort;f3f3cb;0;63;BR;-;1;-;-;-;1;-;-;-;-
+42;Commercial;Snack Belfort;f3f3cb;0;63;SOC;-;-;-;-;-;-;-;-;-;-
+43;Commercial;Camion pizza;f3f3cb;0;74;SOC;-;-;-;-;-;-;-;-;-;-
+44;Commercial;RU Montbeliard;f3f3cb;0;64;BR;-;-;2;-;-;-;1;-;-;-
+45;Commercial;Services Finances;f3f3cb;0;753;BR;-;2;-;1;-;-;-;-;-;58
+46;Military;Accueil Belfort;f3d0cb;0;73;TC;1;-;-;-;1;-;-;-;-;-
+47;Military;Accueil Sevenans;f3d0cb;0;53;TC;1;-;-;1;-;-;-;-;-;-
+48;Military;Accueil Montbéliard;f3d0cb;0;43;TC;1;-;1;-;-;-;-;-;-;-
+49;Military;Pont;f3d0cb;0;73;SOC;2;3;-;-;-;-;-;-;50;-
+50;Military;P108;f3d0cb;0;73;BR;3;1;-;3;-;-;-;-;-;49
+51;Military;Tour penchée;f3d0cb;0;764;SOC;2;-;-;2;1;-;-;-;52;-
+52;Military;T306;f3d0cb;0;654;BR;3;3;-;1;-;-;-;-;-;51
+53;Military;Château;f3d0cb;0;743;BR;3;-;-;1;2;-;-;1;-;-
+54;Military;Salle du conseil;f3d0cb;0;53;SOC;2;-;1;1;1;-;-;-;-;57
+55;Military;DRODI;f3d0cb;0;63;SOC;2;-;-;1;2;-;-;-;-;60
+56;Military;Infirmerie;f3d0cb;0;53;BR;3;-;3;-;1;-;-;-;-;61
+57;Scientific;BU Sevenans;d1f1cd;0;53;TC;CS;-;-;-;-;-;-;1;54,58;-
+58;Scientific;4ème étage;d1f1cd;0;43;SOC;CS;-;-;2;1;-;-;-;45,59;57
+59;Scientific;P457;d1f1cd;0;63;BR;CS;-;2;-;-;-;1;1;?;58
+60;Scientific;Bu Belfort;d1f1cd;0;73;TC;TM;-;-;-;-;1;-;-;55,61;-
+61;Scientific;Crunch Lab;d1f1cd;0;53;SOC;TM;-;2;-;-;-;1;-;56,62;60
+62;Scientific;Salle informatique;d1f1cd;0;73;BR;TM;-;-;2;-;1;-;1;-;61
+63;Scientific;Salle TP MQ;d1f1cd;0;43;TC;CG;-;-;-;-;-;1;-;32;-
+64;Scientific;GMC;d1f1cd;0;63;SOC;CG;2;-;-;-;-;-;1;33,65;63
+65;Scientific;TITAN;d1f1cd;0;43;BR;CG;-;-;-;2;1;1;-;-;64
+66;Scientific;BU Montbéliard;d1f1cd;0;73;SOC;CG;-;-;-;1;-;1;-;67,68;-
+67;Scientific;EDIM;d1f1cd;0;73;BR;CS;3;-;-;-;1;-;-;-;66
+68;Scientific;ELLIAD/ERCOS;d1f1cd;0;533;BR;TM;-;-;-;1;1;1;-;-;66
+69;Guild;AE;e2ccf2;0;0;BR;Civil;-;-;1;3;-;-;1;-;-
+70;Guild;BDS;e2ccf2;0;0;BR;RawMaterial;2;1;1;1;-;-;-;-;-
+71;Guild;BDF;e2ccf2;0;0;BR;Commercial;-;-;-;-;1;1;1;-;-
+72;Guild;CETU;e2ccf2;0;0;BR;Conflict;2;-;1;-;-;-;1;-;-
+73;Guild;Blousards;e2ccf2;0;0;BR;Scientific;-;3;-;-;-;1;1;-;-
+74;Guild;Anti-Blousards;e2ccf2;0;0;BR;Military;-;3;-;-;1;-;-;-;-
+75;Guild;Club Welcome;e2ccf2;0;0;BR;ManufacturedProduct;2;-;2;-;-;-;-;-;-
+76;Guild;FIMU;e2ccf2;0;0;BR;RawManGuild;-;-;-;-;3;1;1;-;-
+77;Guild;Integ’;e2ccf2;0;0;BR;Merveille;-;2;2;-;-;1;-;-;-

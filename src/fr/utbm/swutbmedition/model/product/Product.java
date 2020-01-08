@@ -5,7 +5,7 @@ public class Product {
 	protected String icon;
 	
     public Product() {
-        // TODO implement here
+        this.icon = "";
     }
     
     public String getIcon() {

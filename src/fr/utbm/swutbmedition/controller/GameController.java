@@ -66,7 +66,9 @@ public class GameController {
     	this.gameFrame.refreshGameStatus();
     	this.gameFrame.refreshScoreboard();
     	
-    	this.gameFrame.displayHand(this.game.getCurrentPlayer());
+    	this.gameFrame.displayPlayerHand(this.game.getCurrentPlayer());
+    	this.gameFrame.displayPlayerBoard(this.game.getCurrentPlayer());
+    	this.gameFrame.refreshAllBoards();
     	
     	
     	this.game.setStart(true);
@@ -83,7 +85,8 @@ public class GameController {
 			playerID = 0;
 			this.game.setRound(this.game.getRound() + 1);
 			
-			System.out.println("Round : " + this.game.getRound() + " | Age : " + this.game.getAge());
+	    	this.gameFrame.refreshAllBoards();
+			
 			if(this.game.getRound() == 6) {
 				// Il y a 6 tours par age
 				this.game.setAge(this.game.getAge() + 1);
@@ -120,7 +123,8 @@ public class GameController {
 		this.gameFrame.refreshGameStatus();
 
 		// On affiche le board du joueurs suivant
-		this.gameFrame.displayHand(this.game.getCurrentPlayer());
+		this.gameFrame.displayPlayerHand(this.game.getCurrentPlayer());
+		this.gameFrame.displayPlayerBoard(this.game.getCurrentPlayer());
 		
 	}
 

@@ -6,6 +6,7 @@ import fr.utbm.swutbmedition.controller.GameController;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.view.component.BoardComponent;
 import fr.utbm.swutbmedition.view.component.CardComponent;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -36,11 +37,11 @@ public class GameFrame extends BorderPane {
     
     private HashMap<Card, CardComponent> cardsButton;
     
-    private GridPane playerBoardLayout;
+    private BorderPane playerBoardLayout;
     private VBox scoreboard;
     private HBox gameStatus;
     private FlowPane playerHand;
-    private GridPane otherBoardsLayout;
+    private FlowPane otherBoardsLayout;
     private HBox actionsLayout;
     private Card selectedCard;
     private Text textAction;
@@ -69,7 +70,8 @@ public class GameFrame extends BorderPane {
     	mainLayout.getChildren().add(topLayout);
     	
     	// A gauche on met le board du player
-    	this.playerBoardLayout = new GridPane();
+    	this.playerBoardLayout = new BorderPane();
+    	this.playerBoardLayout.setPadding(new Insets(5));
     	this.playerBoardLayout.setStyle("-fx-border-style: solid outside;" + 
                 "-fx-border-width: 1;" + 
                 "-fx-border-color: black;" + 
@@ -189,7 +191,8 @@ public class GameFrame extends BorderPane {
     	mainLayout.getChildren().add(bottomLayout);
     	
     	// Grille de tous les boards
-    	this.otherBoardsLayout = new GridPane();
+    	this.otherBoardsLayout = new FlowPane(Orientation.HORIZONTAL,4,2);
+    	this.otherBoardsLayout.setAlignment(Pos.CENTER);
     	this.otherBoardsLayout.setMaxWidth(Double.MAX_VALUE);
     	this.otherBoardsLayout.setStyle("-fx-border-style: solid outside;" + 
                 "-fx-border-width: 1;" + 
@@ -201,7 +204,7 @@ public class GameFrame extends BorderPane {
     	this.scoreboard = new VBox();
     	this.scoreboard.setPadding(new Insets(40,40,40,40));
     	this.scoreboard.setAlignment(Pos.CENTER);
-    	this.scoreboard.setSpacing(30);
+    	this.scoreboard.setSpacing(20);
     	this.scoreboard.setMaxWidth(300);
     	this.scoreboard.setStyle("-fx-border-style: solid outside;" + 
                 "-fx-border-width: 1;" + 
@@ -229,9 +232,12 @@ public class GameFrame extends BorderPane {
     
     public void refreshScoreboard() {
     	this.scoreboard.getChildren().clear();
+    	Text title = new Text("Conflits");
+    	title.setFont(Font.font(25));
+    	this.scoreboard.getChildren().add(title);
     	for(Player p : this.game.getPlayers()) {
     		p.countScore(game);
-    		Text text = new Text(p.getName() + " : " + p.getCreditsECTS());
+    		Text text = new Text(p.getName() + " : " + p.countConflicts());
     		text.setFont(Font.font(20));
     		this.scoreboard.getChildren().add(text);   		
     	}
@@ -244,13 +250,13 @@ public class GameFrame extends BorderPane {
     }
 
 
-	public void displayHand(Player currentPlayer) {
+	public void displayPlayerHand(Player currentPlayer) {
 		this.playerHand.getChildren().clear();
 		
 		this.cardsButton = new HashMap<Card, CardComponent>();
 		
 		for(Card card : currentPlayer.getHandCards()) {
-			CardComponent btn = new CardComponent(card);
+			CardComponent btn = new CardComponent(card, false);
 			this.cardsButton.put(card, btn);
 			btn.setMinSize(220, 150);
 			btn.setMaxWidth(Double.MAX_VALUE);
@@ -278,6 +284,18 @@ public class GameFrame extends BorderPane {
 	    	});
 	    	//HBox.setHgrow(btn, Priority.ALWAYS);
 			this.playerHand.getChildren().add(btn);
+		}
+	}
+	
+	public void displayPlayerBoard(Player player) {
+			this.playerBoardLayout.getChildren().clear();
+			this.playerBoardLayout.setCenter(new BoardComponent(player,true));			
+	}
+	
+	public void refreshAllBoards() {
+		this.otherBoardsLayout.getChildren().clear();
+		for(Player player : this.game.getPlayers()) {
+			this.otherBoardsLayout.getChildren().add(new BoardComponent(player, false));
 		}
 	}
 }
