@@ -1,14 +1,9 @@
 package fr.utbm.swutbmedition.model.product;
 
-import java.util.*;
+import javafx.scene.image.ImageView;
 
 public class Sheet extends RawMaterial {
     public Sheet() {
-        // TODO implement here
+    	this.icon = "file:./data/images/sheetRond.png";
     }
-
-    public Sheet(ArrayList<RawMaterial> materialArray) {
-        // TODO implement here
-    }
-
 }

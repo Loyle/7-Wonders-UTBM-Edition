@@ -58,7 +58,7 @@ public class Player {
     public void sellCard(Card card) {
     	if(this.handCards.contains(card)) {
     		this.handCards.remove(card);
-    		this.setMoney(3);
+    		this.money += 3;
     	}
     }
     

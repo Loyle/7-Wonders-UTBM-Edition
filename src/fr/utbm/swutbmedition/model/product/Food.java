@@ -1,14 +1,10 @@
 package fr.utbm.swutbmedition.model.product;
 
-import java.util.*;
+import javafx.scene.image.ImageView;
 
 public class Food extends RawMaterial {
 
     public Food() {
-        // TODO implement here
-    }
-
-    public Food(ArrayList<RawMaterial> materialArray) {
-        // TODO implement here
+    	this.icon = "file:./data/images/nourritureRond.png";
     }
 }

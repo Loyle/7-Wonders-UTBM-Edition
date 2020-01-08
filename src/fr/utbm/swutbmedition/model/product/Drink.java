@@ -1,13 +1,9 @@
 package fr.utbm.swutbmedition.model.product;
 
-import java.util.*;
+import javafx.scene.image.ImageView;
 
 public class Drink extends RawMaterial {
     public Drink() {
-        // TODO implement here
-    }
-
-    public Drink(ArrayList<RawMaterial> materialArray) {
-        // TODO implement here
+    	this.icon = "file:./data/images/boissonRond.png";
     }
 }
