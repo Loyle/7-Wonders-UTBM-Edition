@@ -310,4 +310,15 @@ public class GameFrame extends BorderPane {
 	public MainFrame getMainFrame() {
 		return this.mainFrame;
 	}
+	public void finish() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Fin de partie");
+		String score = new String("");
+		for(Player p : this.game.getPlayers()) {
+			p.countScore(this.game);
+			score += p.getName() + " : " + p.getCreditsECTS() + "\n";
+		}
+		alert.setContentText(score);
+		alert.showAndWait();
+	}
 }

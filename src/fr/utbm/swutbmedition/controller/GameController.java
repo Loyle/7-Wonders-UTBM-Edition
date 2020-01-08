@@ -270,6 +270,8 @@ public class GameController {
 		this.gameFrame.getMainFrame().showMenuFrame();
 		
 		System.out.println("Partie terminée");
+		
+		this.gameFrame.finish();
     }
 	
 	private void checkDoubleProductCard(Card card) {
