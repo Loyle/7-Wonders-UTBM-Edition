@@ -24,39 +24,39 @@ import javafx.scene.text.Text;
 public class CardComponent extends BorderPane {
 	private Card card;
 	
-	public CardComponent(Card card) {
-		this.card = card;
+	public CardComponent(Card card, boolean smallCard) {
+		this.card = card;		
 		
-		System.out.println(card.getAge());
-		
-		
-		this.setMinWidth(220);
-		this.setPrefHeight(152);
+		this.setMinWidth((smallCard) ? 150 : 220);
+		this.setPrefHeight((smallCard) ? 70 : 152);
 		this.setBackground(new Background(new BackgroundFill(card.getColor(), CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		FlowPane neededRessources = new FlowPane(Orientation.VERTICAL,2,4);
-		neededRessources.setAlignment(Pos.TOP_LEFT);
-		neededRessources.setMinWidth(35);
-		//neededRessources.setPadding(new Insets(5));
 		
-		if(card.getCostMoney() > 0) {
-			for(int i = 0; i < card.getCostMoney(); i++) {
-				ImageView ico = new ImageView("file:./data/images/pieceRond.png");
-				ico.setFitWidth(35);
-				ico.setPreserveRatio(true);
-				neededRessources.getChildren().add(ico);				
+		if(!smallCard) {
+			FlowPane neededRessources = new FlowPane(Orientation.VERTICAL,2,4);
+			neededRessources.setAlignment(Pos.TOP_LEFT);
+			neededRessources.setMinWidth(35);
+			//neededRessources.setPadding(new Insets(5));
+			
+			if(card.getCostMoney() > 0) {
+				for(int i = 0; i < card.getCostMoney(); i++) {
+					ImageView ico = new ImageView("file:./data/images/pieceRond.png");
+					ico.setFitWidth(35);
+					ico.setPreserveRatio(true);
+					neededRessources.getChildren().add(ico);				
+				}
 			}
-		}
-		else {
-			for(Product product : card.getCostProduct()) {
-				ImageView ico = new ImageView(product.getIcon());
-				ico.setFitWidth(35);
-				ico.setPreserveRatio(true);
-				neededRessources.getChildren().add(ico);
+			else {
+				for(Product product : card.getCostProduct()) {
+					ImageView ico = new ImageView(product.getIcon());
+					ico.setFitWidth(35);
+					ico.setPreserveRatio(true);
+					neededRessources.getChildren().add(ico);
+				}
 			}
+			
+			this.setLeft(neededRessources);
 		}
-		
-		this.setLeft(neededRessources);
 		
 		VBox centralPart = new VBox();
 		centralPart.setAlignment(Pos.CENTER);
@@ -70,7 +70,7 @@ public class CardComponent extends BorderPane {
 		if (card instanceof ProductCard) {
 			for(Product product : ((ProductCard) card).getProducts()) {
 				ImageView ico = new ImageView(product.getIcon());
-				ico.setFitWidth(35);
+				ico.setFitWidth((smallCard) ? 30 : 35);
 				ico.setPreserveRatio(true);
 				produced.getChildren().add(ico);
 			}
@@ -86,16 +86,16 @@ public class CardComponent extends BorderPane {
 			produced.getChildren().add(text);
 		}
 		else {
-			produced.getChildren().add(new Text("?"));			
+			produced.getChildren().add(new Text(""));			
 		}
 		
 		
 		BorderPane pane = new BorderPane();
 		pane.setStyle("-fx-background-color: white;");
-		pane.setMinSize(220, 110);
+		pane.setPrefSize((smallCard) ? 150 : 220, (smallCard) ? 50 : 100);
 		
 		Text text = new Text(card.getName());
-		text.setFont(Font.font(20));
+		text.setFont(Font.font((smallCard) ? 14 : 20));
 		
 		pane.setCenter(text);
 		

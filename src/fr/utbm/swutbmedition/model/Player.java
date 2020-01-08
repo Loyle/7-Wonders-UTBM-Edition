@@ -64,11 +64,7 @@ public class Player {
     
     public void countScore(Game game) {
     	// Les pts de conflits sont converti en pt de victoire
-    	int conflictsPoints = 0;
-        for(int points : this.conflicts) {
-        	conflictsPoints += points;
-        }
-        
+    	int conflictsPoints = this.countConflicts();
         
         // Toutes les 3 pièces = 1 pt de score
         int treasurePoints = 0;
@@ -126,7 +122,7 @@ public class Player {
     	ArrayList<Product> products = new ArrayList<Product>();
     	
     	// On récupère le product du board
-    	products.add(this.board.getProduct());
+    	//products.add(this.board.getProduct());
     	
     	// FAUT RECUPERER AUSSI LES PRODUCT DES ETAPES DE BOARD
     	
@@ -181,6 +177,14 @@ public class Player {
 	public ArrayList<Integer> getConflicts() {
 		// TODO Auto-generated method stub
 		return this.conflicts;
+	}
+	
+	public int countConflicts() {
+		int total = 0;
+		for(int value : this.conflicts) {
+			total += value;
+		}
+		return total;
 	}
 	public Board getBoard() {
 		// TODO Auto-generated method stub
