@@ -10,6 +10,7 @@ import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
 import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
+import fr.utbm.swutbmedition.model.loader.CardLoader;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
@@ -43,6 +44,8 @@ public class GameController {
     	this.game.addPlayer(new Player("Theo"));
     	this.game.addPlayer(new Player("Antoine"));
     	
+    	
+    	this.game.setExistingCards(CardLoader.loadCard(this.game.getPlayers().size()));
     	// On donne les cartes de depart à l'ensemble des joueurs
     	this.distributeCards();
     	
