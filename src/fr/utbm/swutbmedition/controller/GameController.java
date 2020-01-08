@@ -2,6 +2,7 @@ package fr.utbm.swutbmedition.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Random;
 
 import fr.utbm.swutbmedition.model.Game;
@@ -147,16 +148,18 @@ public class GameController {
     		// On clear la main actuelle
     		p.getHandCards().clear();
     		
+    		ArrayList<Card> cardsRemaining = this.game.getExistingCards();
     		for(int j = 0; j < 7; j++) {
-	    		// On distribu 7 cartes pour chaque joueurs (en fonction de l'Age)
-	    		int i;
+	    		// On distribue 7 cartes pour chaque joueurs (en fonction de l'Age)
+    			Iterator i = cardsRemaining.iterator();
 	    		do {
 	    			Random r = new Random();
-	    			i = r.nextInt(this.game.getExistingCards().size());
-				} while (this.game.getExistingCards().get(i).getAge() != this.game.getAge());
+	    			i = r.nextInt(cardsRemaining.size());
+				} while (cardsRemaining.get(i).getAge() != this.game.getAge());
 	    		
-	    		
-	    		p.addCard(this.game.getExistingCards().get(i).copy());
+	    		Card currentCard = cardsRemaining.get(i);
+	    		p.addCard(currentCard);
+	    		cardsRemaining.remove(currentCard);
     		}
     	}
     }
