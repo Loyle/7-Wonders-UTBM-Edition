@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Random;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.card.Civil;
 import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.loader.CardLoader;
@@ -134,39 +137,23 @@ public class GameController {
 
 	public void distributeCards() {
     	// Distribue les cartes aux joueurs en fct de l'age
-		ArrayList<Card> toRemove = new ArrayList<Card>();
-		int nbToChoose = 9-(this.game.getPlayers().size()+2);
-		for(Card c: this.game.getExistingCards()) {
-			if(c instanceof Guild) {
-				for(int j=0;j<nbToChoose;++j) {
-					Random R = new Random();
-					int k = R.nextInt(9);
-					toRemove.add(this.game.getExistingCards().get(k));
+
+		for(Player player : this.game.getPlayers()) {
+			ArrayList<Integer> blackList = new ArrayList<Integer>();
+			for(int i = 0; i < 7; i++) {
+				if(this.game.getExistingCards().get(i).getAge() == this.game.getAge()) {	
+					int id;
+					do {
+						Random r = new Random();
+						id = r.nextInt(this.game.getExistingCards().size() + 1);
+					}
+					while(blackList.contains(id) == true);
+					
+					blackList.add(id);
+					player.addCard(this.game.getExistingCards().get(i));
 				}
 			}
 		}
-
-		this.game.getExistingCards().removeAll(toRemove);
-    	for(Player p : this.game.getPlayers()) {
-    		// On clear la main actuelle
-    		p.getHandCards().clear();
-    		
-    		ArrayList<Card> cardsRemaining = this.game.getExistingCards();
-    		for(int j = 0; j < 7; j++) {
-	    		// On distribue 7 cartes pour chaque joueurs (en fonction de l'Age)
-    			Iterator i = cardsRemaining.iterator();
-                        Card currentCard = new Card();
-	    		do {
-	    			Random r = new Random();
-	    			Int k = r.nextInt(cardsRemaining.size());
-                                for(int l = 0; l<k;l++){
-                                   currentCard=i.next();
-                                }
-				} while (currentCard.getAge() != this.game.getAge()){
-	    		p.addCard(currentCard);
-	    		i.remove();
-    		}
-    	}
     }
 	
 	private void switchPlayersCards() {
