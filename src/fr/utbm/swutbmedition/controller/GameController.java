@@ -43,7 +43,7 @@ public class GameController {
     	this.game.addPlayer(new Player("Theo"));
     	this.game.addPlayer(new Player("Antoine"));
     	
-    	// On donne les cartes de depart à l'ensemble des joueurs
+    	// On donne les cartes de depart Ã  l'ensemble des joueurs
     	this.distributeCards();
     	
     	for(Player p : this.game.getPlayers()) {
@@ -117,7 +117,7 @@ public class GameController {
 		if(this.checkEnd())
 			this.finish();
 		
-		// On récupère le joueurs suivant
+		// On rÃ©cupÃ¨re le joueurs suivant
 		this.game.setCurrentPlayer(this.game.getPlayers().get(this.playerID));
 		
 		// Refresh status game
@@ -152,14 +152,16 @@ public class GameController {
     		for(int j = 0; j < 7; j++) {
 	    		// On distribue 7 cartes pour chaque joueurs (en fonction de l'Age)
     			Iterator i = cardsRemaining.iterator();
+                        Card currentCard = new Card();
 	    		do {
 	    			Random r = new Random();
-	    			i = r.nextInt(cardsRemaining.size());
-				} while (cardsRemaining.get(i).getAge() != this.game.getAge());
-	    		
-	    		Card currentCard = cardsRemaining.get(i);
+	    			Int k = r.nextInt(cardsRemaining.size());
+                                for(int l = 0; l<k;l++){
+                                   currentCard=i.next();
+                                }
+				} while (currentCard.getAge() != this.game.getAge()){
 	    		p.addCard(currentCard);
-	    		cardsRemaining.remove(currentCard);
+	    		i.remove();
     		}
     	}
     }
@@ -195,15 +197,15 @@ public class GameController {
     private void doConflicts() {
  		// Victoire : 1 / 3 / 5 pts de victoire fct de l'age
     	// Defaire : -1
-    	// Egalité : 0
-    	// Check a droite et à gauche
+    	// EgalitÃ© : 0
+    	// Check a droite et Ã  gauche
     	
     	for(Player p : this.game.getPlayers()) {
     		int pos = this.game.getPlayers().indexOf(p);
  
     		
     		
-    		// Premier temps à droite (donc + 1 par rapport à numero du joueur)
+    		// Premier temps Ã  droite (donc + 1 par rapport Ã  numero du joueur)
     		int toCheck = pos + 1;
     		
     		if(pos == this.game.getPlayers().size() - 1)
@@ -224,7 +226,7 @@ public class GameController {
     			p.addConflicts(0);
     		
     		
-    		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
+    		// DeuxiÃ¨me temps Ã  gauche (donc + 1 par rapport Ã  numero du joueur)
     		toCheck = pos - 1;
     		
     		if(pos == 0)
@@ -248,7 +250,7 @@ public class GameController {
  	}
 
     private boolean checkEnd() {
-    	// Ici faut vérifier si c'est la fin de partie
+    	// Ici faut vÃ©rifier si c'est la fin de partie
     	if(this.game.getRound() == 0 && this.game.getAge() == 4) {
     		return true;    		
     	}
@@ -260,7 +262,7 @@ public class GameController {
 		
 		this.gameFrame.refreshScoreboard();
 		
-		System.out.println("Partie terminée");
+		System.out.println("Partie terminÃ©e");
     }
 	
 	private void checkDoubleProductCard(Card card) {
@@ -293,7 +295,7 @@ public class GameController {
 	
 	public boolean canUseCard(Player player,Card card) {
 		// Regarder si il a les ressources etc...
-		// On check déjà si c'est gratos
+		// On check dÃ©jÃ  si c'est gratos
 		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
 			return true;
 		}
@@ -361,9 +363,9 @@ public class GameController {
 	
 	public String buildWonder(Player player, Card card) {
 		if(!this.game.isStart())
-			return "la partie n'est pas lancée";
+			return "la partie n'est pas lancÃ©e";
 		/*if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
-			return "La merveille a déjà été construite";*/
+			return "La merveille a dÃ©jÃ  Ã©tÃ© construite";*/
 		
 		ArrayList<Product> usedProducts = new ArrayList<Product>();
 		ArrayList<Product> playerProducts = player.getAllProducts();
