@@ -346,13 +346,13 @@ public class GameController {
 	public String buildWonder(Player player, Card card) {
 		if(!this.game.isStart())
 			return "la partie n'est pas lancée";
-		if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
-			return "La merveille a déjà été construite";
+		/*if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
+			return "La merveille a déjà été construite";*/
 		
 		ArrayList<Product> usedProducts = new ArrayList<Product>();
 		ArrayList<Product> playerProducts = player.getAllProducts();
 		ArrayList<Product> notFind = new ArrayList<Product>();
-		ArrayList<Product> costProduct = player.getBoard().getSteps().get(player.getBoard().getLevel()+1).getCostProduct();		
+		ArrayList<Product> costProduct = player.getBoard().getSteps().get(player.getBoard().getLevel()+1).getCostProduct();	
 		if(playerProducts.size() > 0) {
 			
 			for(Product neededProd : costProduct) {
