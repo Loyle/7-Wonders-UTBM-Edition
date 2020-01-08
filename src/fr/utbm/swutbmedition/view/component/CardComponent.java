@@ -36,7 +36,6 @@ public class CardComponent extends BorderPane {
 			FlowPane neededRessources = new FlowPane(Orientation.VERTICAL,2,4);
 			neededRessources.setAlignment(Pos.TOP_LEFT);
 			neededRessources.setMinWidth(35);
-			//neededRessources.setPadding(new Insets(5));
 			
 			if(card.getCostMoney() > 0) {
 				for(int i = 0; i < card.getCostMoney(); i++) {
@@ -76,13 +75,13 @@ public class CardComponent extends BorderPane {
 			}
 		}
 		else if(card instanceof Civil) {
-			Text text = new Text("" + ((Civil) card).getCreditsECTS());
-			text.setFont(Font.font(18));
+			Text text = new Text(((Civil) card).getCreditsECTS() + " ECTS");
+			text.setFont(Font.font(20));
 			produced.getChildren().add(text);
 		}
 		else if(card instanceof Military) {
-			Text text = new Text("" + ((Military)card).getFx());
-			text.setFont(Font.font(18));
+			Text text = new Text(((Military)card).getFx() + " Fx");
+			text.setFont(Font.font(20));
 			produced.getChildren().add(text);
 		}
 		else {
