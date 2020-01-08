@@ -190,4 +190,8 @@ public class Player {
 		// TODO Auto-generated method stub
 		return this.board;
 	}
+	
+	public void setBoard(Board b) {
+		this.board=b;
+	}
 }

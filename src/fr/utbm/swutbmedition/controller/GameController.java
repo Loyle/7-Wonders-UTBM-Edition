@@ -37,6 +37,7 @@ public class GameController {
     
     public void initGame() {
     	// C'est ici qu'on va affecter les board / cartes aux joueurs
+    
     	// Sachant qu'il faut permettre de pouvoir choisir la face de board sur laquel il souhaite commencer
     	
     	// Je fais les essaies ici du coup
@@ -52,6 +53,7 @@ public class GameController {
     	this.game.setExistingCards(CardLoader.loadCard(this.game.getPlayers().size()));
     	// On donne les cartes de depart à l'ensemble des joueurs
     	this.distributeCards();
+    	this.giveBoard();
     	
     	for(Player p : this.game.getPlayers()) {
     		for(Card c : p.getHandCards()) {
@@ -156,6 +158,17 @@ public class GameController {
 			}
 		}
     }
+	
+	public void giveBoard() {
+		for(Player player : this.game.getPlayers()) {
+			Random r = new Random();
+			int i = r.nextInt(this.game.getExistingBoards().size());
+			int j = (Math.random() < 0.5) ? 0 : 1;
+			player.setBoard(this.game.getExistingBoards().get(i).get(0));
+		}
+		
+		
+	}
 	
 	private void switchPlayersCards() {
 		if(this.game.getRotation() == 0) { // vers la droite
