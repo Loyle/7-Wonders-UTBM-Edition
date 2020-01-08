@@ -63,6 +63,9 @@ public class Game {
     public ArrayList<Player> getPlayers() {
     	return this.players;
     }
+    public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
     public void addPlayer(Player player) {
     	this.players.add(player);
     }

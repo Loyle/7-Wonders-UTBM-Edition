@@ -33,7 +33,9 @@ public class GameController {
         this.playerID = 0;
     }
     
-    public void initGame() {
+    public void initGame(ArrayList<Player> players) {
+    	this.game.setPlayers(players);
+    	
     	// C'est ici qu'on va affecter les board / cartes aux joueurs
     	// Sachant qu'il faut permettre de pouvoir choisir la face de board sur laquel il souhaite commencer
     	
@@ -41,10 +43,6 @@ public class GameController {
     	for(Card card : this.game.getExistingCards()) {
         	//System.out.println(card.getName());
         }
-    	this.game.addPlayer(new Player("Marco"));
-    	this.game.addPlayer(new Player("Louis"));
-    	this.game.addPlayer(new Player("Theo"));
-    	this.game.addPlayer(new Player("Antoine"));
     	
     	// On donne les cartes de depart à l'ensemble des joueurs
     	this.distributeCards();
@@ -350,7 +348,7 @@ public class GameController {
 	
 	public String buildWonder(Player player, Card card) {
 		if(!this.game.isStart())
-			return "la partie n'est pas lancée";
+			return "la partie n'est pas lanc�e";
 		/*if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
 			return "La merveille a déjà été construite";*/
 		
