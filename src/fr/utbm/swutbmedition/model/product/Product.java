@@ -1,16 +1,14 @@
 package fr.utbm.swutbmedition.model.product;
 
-import javafx.scene.image.ImageView;
-
 public class Product {
 	
-	protected ImageView icon;
+	protected String icon;
 	
     public Product() {
         // TODO implement here
     }
     
-    public ImageView getIcon() {
+    public String getIcon() {
     	return this.icon;
     }
 

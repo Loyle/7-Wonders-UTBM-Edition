@@ -4,6 +4,6 @@ import javafx.scene.image.ImageView;
 
 public class Sheet extends RawMaterial {
     public Sheet() {
-    	this.icon = new ImageView("file:./data/images/sheetvré.png");
+    	this.icon = "file:./data/images/sheetRond.png";
     }
 }
