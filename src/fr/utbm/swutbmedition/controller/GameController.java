@@ -19,6 +19,8 @@ import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
 import fr.utbm.swutbmedition.view.GameFrame;
 //import sun.security.jca.GetInstance.Instance;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class GameController {
 
@@ -137,24 +139,25 @@ public class GameController {
 	}
 
 	public void distributeCards() {
-    	// Distribue les cartes aux joueurs en fct de l'age
-
-		for(Player player : this.game.getPlayers()) {
-			ArrayList<Integer> blackList = new ArrayList<Integer>();
-			for(int i = 0; i < 7; i++) {
-				if(this.game.getExistingCards().get(i).getAge() == this.game.getAge()) {	
-					int id;
-					do {
-						Random r = new Random();
-						id = r.nextInt(this.game.getExistingCards().size() + 1);
-					}
-					while(blackList.contains(id) == true);
-					
-					blackList.add(id);
-					player.addCard(this.game.getExistingCards().get(i));
-				}
-			}
-		}
+		// Distribue les cartes aux joueurs en fct de l'age
+    	for(Player p : this.game.getPlayers()) {
+    		// On clear la main actuelle
+    		p.getHandCards().clear();
+    		
+    		ArrayList<Card> blacklist = new ArrayList<Card>();
+    		
+    		for(int j = 0; j < 7; j++) {
+	    		// On distribu 7 cartes pour chaque joueurs (en fonction de l'Age)
+	    		int i;
+	    		do {
+	    			Random r = new Random();
+	    			i = r.nextInt(this.game.getExistingCards().size());
+				} while (this.game.getExistingCards().get(i).getAge() != this.game.getAge() || blacklist.contains(this.game.getExistingCards().get(i)));
+	    		
+	    		blacklist.add(this.game.getExistingCards().get(i));
+	    		p.addCard(this.game.getExistingCards().get(i));
+    		}
+    	}
     }
 	
 	public void giveBoard() {
@@ -199,7 +202,7 @@ public class GameController {
     private void doConflicts() {
  		// Victoire : 1 / 3 / 5 pts de victoire fct de l'age
     	// Defaire : -1
-    	// Egalité : 0
+    	// Egalite : 0
     	// Check a droite et à gauche
     	
     	for(Player p : this.game.getPlayers()) {
@@ -228,7 +231,7 @@ public class GameController {
     			p.addConflicts(0);
     		
     		
-    		// Deuxième temps à gauche (donc + 1 par rapport à numero du joueur)
+    		// Deuxieme temps à gauche (donc + 1 par rapport à numero du joueur)
     		toCheck = pos - 1;
     		
     		if(pos == 0)
@@ -252,7 +255,7 @@ public class GameController {
  	}
 
     private boolean checkEnd() {
-    	// Ici faut vérifier si c'est la fin de partie
+    	// Ici faut v�rifier si c'est la fin de partie
     	if(this.game.getRound() == 0 && this.game.getAge() == 4) {
     		return true;    		
     	}
@@ -264,7 +267,9 @@ public class GameController {
 		
 		this.gameFrame.refreshScoreboard();
 		
-		System.out.println("Partie terminée");
+		this.gameFrame.getMainFrame().showMenuFrame();
+		
+		System.out.println("Partie termin�e");
     }
 	
 	private void checkDoubleProductCard(Card card) {
@@ -297,7 +302,7 @@ public class GameController {
 	
 	public boolean canUseCard(Player player,Card card) {
 		// Regarder si il a les ressources etc...
-		// On check déjà si c'est gratos
+		// On check d�j� si c'est gratos
 		if(card.getCostMoney() == 0 && card.getCostProduct().size() == 0) {
 			return true;
 		}
@@ -305,9 +310,6 @@ public class GameController {
 		else if(card.getCostMoney() != 0 && card.getCostProduct().size() == 0) {
 			if(player.getMoney() >= card.getCostMoney()) {
 				return true;
-			}
-			else {				
-				System.out.println("Il vous manque des tunasses");
 			}
 		}
 		// Enfin les cout en ressources
@@ -339,14 +341,14 @@ public class GameController {
 			}
 		}
 			
-		if(!notFind.isEmpty()) {
+		/*if(!notFind.isEmpty()) {
 			ArrayList<ArrayList<Product>> otherPlayerProducts = checkOtherProduct(this.game, player, notFind);
 			for(ArrayList<Product> ap : otherPlayerProducts) {
 				for(Product p : ap) {
 					usedProducts.add(p);
 				}
 			}			
-		}
+		}*/
 		
 
 		
@@ -355,13 +357,6 @@ public class GameController {
 			return true;
 		}
 		else {
-			System.out.println("Il vous manque des ressources !");
-			for(Product p : notFind) {
-				System.out.println("Besoin " + p.getClass().getName());
-			}
-			for(Product p : player.getAllProducts()) {						
-				System.out.println("Mes prods " + p.getClass().getName());
-			}
 			return false;
 		}
 	}
@@ -377,8 +372,8 @@ public class GameController {
 	public String buildWonder(Player player, Card card) {
 		if(!this.game.isStart())
 			return "la partie n'est pas lanc�e";
-		/*if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
-			return "La merveille a déjà été construite";*/
+		if(true)
+			return "";
 		
 		ArrayList<Product> usedProducts = new ArrayList<Product>();
 		ArrayList<Product> playerProducts = player.getAllProducts();
@@ -387,17 +382,19 @@ public class GameController {
 		if(playerProducts.size() > 0) {
 			
 			for(Product neededProd : costProduct) {
-				int i = 0;
-				while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
-					i++;
-				}
-				if(i < playerProducts.size()) {
-					// We found a product !
-					usedProducts.add(neededProd);
-					playerProducts.remove(i);
-				}
-				else {
-					notFind.add(neededProd);
+				if(neededProd != null) {
+					int i = 0;
+					while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
+						i++;
+					}
+					if(i < playerProducts.size()) {
+						// We found a product !
+						usedProducts.add(neededProd);
+						playerProducts.remove(i);
+					}
+					else {
+						notFind.add(neededProd);
+					}
 				}
 			}
 						
@@ -409,10 +406,10 @@ public class GameController {
 			else {
 				String prodMiss = new String("Il vous manque des ressources !\n");
 				for(Product p : notFind) {
-					prodMiss += "Besoin " + p.getClass().getName()+ "\n";
+					//prodMiss += "Besoin " + p.getClass().getName()+ "\n";
 				}
 				for(Product p : player.getAllProducts()) {						
-					System.out.println("Mes prods " + p.getClass().getName());
+					//System.out.println("Mes prods " + p.getClass().getName());
 				}
 				return prodMiss;
 			}

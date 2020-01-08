@@ -10,8 +10,10 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -56,7 +58,17 @@ public class MenuFrame extends BorderPane {
     	
     	Button startButton = new Button("Démarrer");
     	startButton.setMinSize(200, 50);
-    	startButton.setOnAction(e -> mainFrame.showGameFrame(this.menuController.getPlayers()));
+    	startButton.setOnAction(e -> {
+    		if(this.menuController.getPlayers().size() >= 3) {
+    			mainFrame.showGameFrame(this.menuController.getPlayers());    			
+    		}
+    		else {
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setTitle("Information");
+    			alert.setHeaderText("Il faut au minimum 3 joueurs");
+    			alert.showAndWait();
+    		}
+    	});
     	
     	VBox playerAddition = new VBox();
     	playerAddition.setAlignment(Pos.CENTER);

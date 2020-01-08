@@ -117,12 +117,15 @@ public class GameFrame extends BorderPane {
     	
     	btnBuildWonder.setOnAction(e ->{
     		if (selectedCard != null) {
-    			textAction.setText(gameController.buildWonder(game.getCurrentPlayer(), selectedCard));
-    			selectedCard = null;
+    			gameController.buildWonder(game.getCurrentPlayer(), selectedCard);
+    			//selectedCard = null;
     		}
-    			else {
-    				textAction.setText("Il faut sélectionner une carte");
-    			}
+    		else {
+    			Alert alert = new Alert(AlertType.INFORMATION);
+    			alert.setTitle("Information");
+    			alert.setHeaderText("Veuillez sélectionner une carte");
+    			alert.showAndWait();
+    		}
     	});
     	
     	this.buildBtn.setOnAction(e -> {
@@ -302,5 +305,9 @@ public class GameFrame extends BorderPane {
 				this.displayPlayerBoard(player);
 			});
 		}
+	}
+	
+	public MainFrame getMainFrame() {
+		return this.mainFrame;
 	}
 }

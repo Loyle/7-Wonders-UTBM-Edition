@@ -43,7 +43,7 @@ public class CardLoader {
 				String[] split = line.split(cvsSplitBy);
 				
 				for (char ch : split[5].toCharArray()) {
-					if (Character.getNumericValue(ch) <= 3) {
+					if (Character.getNumericValue(ch) <= nbPlayer) {
 						ArrayList<Product> products = new ArrayList<Product>();
 						for (int i = 8; i <= 14; i++) {
 							// On ajout les product

@@ -46,10 +46,12 @@ public class BoardComponent extends BorderPane{
 		info.setPadding(new Insets(10));
 		
 		// Premier ressource a afficher, celle du board
-		//ImageView boardProduct = new ImageView(player.getBoard().getProduct().getIcon());
-		//boardProduct.setFitWidth(35);
-		//boardProduct.setPreserveRatio(true);
-		//info.getChildren().add(boardProduct);
+		if(isBig) {
+			ImageView boardProduct = new ImageView(player.getBoard().getProduct().getIcon());
+			boardProduct.setFitWidth(50);
+			boardProduct.setPreserveRatio(true);
+			info.getChildren().add(boardProduct);			
+		}
 		
 		Text pseudo = new Text(player.getName());
 		pseudo.setFont(Font.font((isBig) ? 40 : 15));
