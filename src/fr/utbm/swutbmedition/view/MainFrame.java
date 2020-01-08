@@ -1,7 +1,9 @@
 package fr.utbm.swutbmedition.view;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
+import fr.utbm.swutbmedition.model.Player;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -34,8 +36,8 @@ public class MainFrame {
 		this.getPrimaryStage().getScene().setRoot(this.menuFrame);
 	}
 	
-	public void showGameFrame() {
-		this.gameFrame.getGameController().initGame();
+	public void showGameFrame(ArrayList<Player> players) {
+		this.gameFrame.getGameController().initGame(players);
 		this.gameFrame.getGameController().start();
 		this.getPrimaryStage().getScene().setRoot(this.gameFrame);
 	}

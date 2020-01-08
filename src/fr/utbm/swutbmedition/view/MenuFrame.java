@@ -2,12 +2,16 @@ package fr.utbm.swutbmedition.view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+
 import fr.utbm.swutbmedition.controller.MenuController;
+import fr.utbm.swutbmedition.model.Player;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -26,6 +30,8 @@ public class MenuFrame extends BorderPane {
     private VBox layoutCenter;
     private VBox layoutSettings;
     private VBox layoutBottom;
+    
+    private VBox playersList;
 
     public MenuFrame(MainFrame mainFrame) {
     	this.mainFrame = mainFrame;
@@ -50,11 +56,37 @@ public class MenuFrame extends BorderPane {
     	
     	Button startButton = new Button("Démarrer");
     	startButton.setMinSize(200, 50);
-    	startButton.setOnAction(e -> mainFrame.showGameFrame());
+    	startButton.setOnAction(e -> mainFrame.showGameFrame(this.menuController.getPlayers()));
     	
-    	Button settingButton = new Button("Paramètres");
-    	settingButton.setMinSize(200, 50);
-    	settingButton.setOnAction(e -> menuController.onSettingBtnClick());
+    	VBox playerAddition = new VBox();
+    	playerAddition.setAlignment(Pos.CENTER);
+    	playerAddition.setSpacing(20);
+    	
+    	HBox playerInput = new HBox();
+    	playerInput.setAlignment(Pos.CENTER);
+    	playerInput.setSpacing(10);
+    	
+    	TextField textfield = new TextField();
+    	textfield.setPrefSize(300, 50);
+    	playerInput.getChildren().add(textfield);
+    	
+    	Button addButton = new Button("Ajouter");
+    	addButton.setMinSize(100, 50);
+    	addButton.setOnAction(e -> {
+    		if(!textfield.getText().equals("")) {
+    			menuController.addPlayer(new Player(textfield.getText())); 
+    			textfield.clear();
+    		}
+    	});
+    	playerInput.getChildren().add(addButton);
+    	
+    	playerAddition.getChildren().add(playerInput);
+    	
+    	this.playersList = new VBox();
+    	this.playersList.setAlignment(Pos.CENTER);
+    	this.playersList.setSpacing(10);
+    	
+    	playerAddition.getChildren().add(this.playersList);
     	
     	Button closeButton = new Button("Quitter");
     	closeButton.setMinSize(150, 40);
@@ -65,7 +97,7 @@ public class MenuFrame extends BorderPane {
     	layoutBottom.setPadding(new Insets(0,40,30,0));
     	
     	layoutMenu = new BorderPane();
-    	layoutCenter = new VBox(viewLogoImage,title,startButton,settingButton);
+    	layoutCenter = new VBox(viewLogoImage,title,startButton,playerAddition);
     	layoutCenter.setSpacing(30);
     	layoutCenter.setAlignment(Pos.CENTER);
     	layoutMenu.setCenter(layoutCenter);
@@ -96,5 +128,26 @@ public class MenuFrame extends BorderPane {
     
     public void showSettings() {
     	this.setCenter(layoutSettings);    	
+    }
+    
+    public void refreshPlayers() {
+    	this.playersList.getChildren().clear();
+    	for(Player player : this.menuController.getPlayers()) {
+    		HBox p = new HBox();
+    		p.setAlignment(Pos.CENTER);
+    		p.setSpacing(10);
+    		
+    		Text name = new Text(player.getName());
+    		name.setFont(Font.font(18));
+    		
+    		Button remove = new Button("X");
+    		remove.setOnMouseClicked(e -> {
+    			menuController.removePlayer(player);
+    		});
+    		
+    		p.getChildren().addAll(name,remove);
+    		
+    		this.playersList.getChildren().add(p);
+    	}
     }
 }
