@@ -2,7 +2,9 @@ package fr.utbm.swutbmedition.model;
 
 import java.util.*;
 
+import fr.utbm.swutbmedition.model.board.Board;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.loader.BoardLoader;
 import fr.utbm.swutbmedition.model.loader.CardLoader;
 
 public class Game {
@@ -16,6 +18,7 @@ public class Game {
     private String ageName;  // 1: TC 2: SOC 3: BR <=> a voir si on s'en sert
     private boolean isStart;
     private ArrayList<Card> existingCards;
+    private ArrayList<ArrayList<Board>> existingBoards;
 
     public Game() {
         //this.gameFrame = gameFrame;
@@ -25,6 +28,7 @@ public class Game {
         this.age = 1;
         this.isStart = false;
         this.existingCards = CardLoader.loadCard();
+        this.setExistingBoards(BoardLoader.loadBoard());
         this.rotation = 0;
     }
     
@@ -79,5 +83,13 @@ public class Game {
 	 */
 	public void setRotation(int rotation) {
 		this.rotation = rotation;
+	}
+
+	public ArrayList<ArrayList<Board>> getExistingBoards() {
+		return existingBoards;
+	}
+
+	public void setExistingBoards(ArrayList<ArrayList<Board>> existingBoards) {
+		this.existingBoards = existingBoards;
 	}
 }

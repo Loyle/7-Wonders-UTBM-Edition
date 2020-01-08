@@ -10,6 +10,23 @@ public class Step {
     private ArrayList<Effect> effects;
     
     public Step() {
-        
+        this.setCostProduct(null);
+        this.effects = null;
     }
+    
+    public Step(ArrayList<Product> costProduct, ArrayList<Effect> effects) {
+    	
+    	this.setCostProduct(costProduct);
+    	this.effects = effects;
+    	
+    }
+
+	public ArrayList<Product> getCostProduct() {
+		return costProduct;
+	}
+
+	public void setCostProduct(ArrayList<Product> costProduct) {
+		this.costProduct = costProduct;
+	}
+	
 }

@@ -42,4 +42,27 @@ public class Board {
 		return this.level;
     	
     }
+    public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getFace() {
+		return face;
+	}
+	public void setFace(String face) {
+		this.face = face;
+	}
+	public ArrayList<Step> getSteps() {
+		return steps;
+	}
+	public void setSteps(ArrayList<Step> steps) {
+		this.steps = steps;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 }

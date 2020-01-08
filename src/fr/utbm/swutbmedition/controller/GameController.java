@@ -7,6 +7,7 @@ import java.util.Random;
 import fr.utbm.swutbmedition.model.Game;
 import fr.utbm.swutbmedition.model.Player;
 import fr.utbm.swutbmedition.model.card.Card;
+import fr.utbm.swutbmedition.model.card.Guild;
 import fr.utbm.swutbmedition.model.card.ProductCard;
 import fr.utbm.swutbmedition.model.product.Food;
 import fr.utbm.swutbmedition.model.product.Product;
@@ -125,6 +126,19 @@ public class GameController {
 
 	public void distributeCards() {
     	// Distribue les cartes aux joueurs en fct de l'age
+		ArrayList<Card> toRemove = new ArrayList<Card>();
+		int nbToChoose = 9-(this.game.getPlayers().size()+2);
+		for(Card c: this.game.getExistingCards()) {
+			if(c instanceof Guild) {
+				for(int j=0;j<nbToChoose;++j) {
+					Random R = new Random();
+					int k = R.nextInt(9);
+					toRemove.add(this.game.getExistingCards().get(k));
+				}
+			}
+		}
+
+		this.game.getExistingCards().removeAll(toRemove);
     	for(Player p : this.game.getPlayers()) {
     		// On clear la main actuelle
     		p.getHandCards().clear();
@@ -336,5 +350,50 @@ public class GameController {
 		
 		player.sellCard(card);
 		next();
+	}
+	
+	public String buildWonder(Player player, Card card) {
+		if(!this.game.isStart())
+			return "la partie n'est pas lancée";
+		if(player.getBoard().getSteps().get(player.getBoard().getLevel()+1)==null)
+			return "La merveille a déjà été construite";
+		
+		ArrayList<Product> usedProducts = new ArrayList<Product>();
+		ArrayList<Product> playerProducts = player.getAllProducts();
+		ArrayList<Product> notFind = new ArrayList<Product>();
+		ArrayList<Product> costProduct = player.getBoard().getSteps().get(player.getBoard().getLevel()+1).getCostProduct();		
+		if(playerProducts.size() > 0) {
+			
+			for(Product neededProd : costProduct) {
+				int i = 0;
+				while(i < playerProducts.size() && playerProducts.get(i).getClass().equals(neededProd.getClass()) == false) {
+					i++;
+				}
+				if(i < playerProducts.size()) {
+					// We found a product !
+					usedProducts.add(neededProd);
+				}
+				else {
+					notFind.add(neededProd);
+				}
+			}
+						
+			if(costProduct.size() == usedProducts.size()) {
+				// We have all the product to step up the wonder
+				player.getBoard().setLevel(player.getBoard().getLevel()+1);
+				this.next();
+			}
+			else {
+				String prodMiss = new String("Il vous manque des ressources !\n");
+				for(Product p : notFind) {
+					prodMiss += "Besoin " + p.getClass().getName()+ "\n";
+				}
+				for(Product p : player.getAllProducts()) {						
+					System.out.println("Mes prods " + p.getClass().getName());
+				}
+				return prodMiss;
+			}
+		}
+		return "";
 	}
 }
