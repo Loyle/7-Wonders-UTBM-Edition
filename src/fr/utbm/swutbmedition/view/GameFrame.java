@@ -312,6 +312,7 @@ public class GameFrame extends BorderPane {
 	}
 	public void finish() {
 		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText("Résultats");
 		alert.setTitle("Fin de partie");
 		String score = new String("");
 		for(Player p : this.game.getPlayers()) {
